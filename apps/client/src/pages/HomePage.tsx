@@ -9,14 +9,13 @@ import MediaCard from "../features/mediaCard/MediaCard";
 import { Container } from "@mui/system";
 import { useParams } from "react-router-dom";
 const Home = () => {
-  // const [allDeals, setAllDeals] = useState<IDeal[]>([]);
   const { id } = useParams();
   const {
     data: deals, //renaming the data to "deals"
     isLoading,
     isSuccess,
     isError,
-  } = useGetAllDealsQuery(null);
+  } = useGetAllDealsQuery(null, { pollingInterval: 3000 });
 
   let content;
 

@@ -11,8 +11,6 @@ import { json } from "react-router-dom";
 import MediaCardDisplayOnly from "../components/MediaCardDisplayOnly";
 
 const LandingPage = () => {
-  // const [allDeals, setAllDeals] = useState<IDeal[]>([]);
-
   const {
     data: deals, //renaming the data to "deals"
     isLoading,

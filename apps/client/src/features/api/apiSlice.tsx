@@ -13,6 +13,18 @@ export const apiSlice = createApi({
       // 2) add in the providesTags
       providesTags: [`Deals`],
     }),
+    searchAllDeals: builder.query<
+      IDeal[],
+      { name: string; category: string; location: string }
+    >({
+      query: (arg) => {
+        const { name, category, location } = arg;
+        console.log(name);
+        return {
+          url: `/deal/search?name=${name}&category=${category}&location=${location}`,
+        };
+      },
+    }),
     addUpvote: builder.mutation({
       query: (id) => ({
         url: `/deal/upvote/${id}`,
@@ -32,6 +44,7 @@ export const apiSlice = createApi({
 
 export const {
   useGetAllDealsQuery,
+  useSearchAllDealsQuery,
   useAddUpvoteMutation,
   useAddDownvoteMutation,
 } = apiSlice;

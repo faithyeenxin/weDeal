@@ -1,10 +1,37 @@
 import { Button, Container, Grid, TextField, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import CategoryField from "./CategoryField";
-
+import { useSearchAllDealsQuery } from "../features/api/apiSlice";
+import { useSearchParams } from "react-router-dom";
 const SearchBar = () => {
+  const [nameSearch, setNameSearch] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
+  const [location, setLocation] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const {
+    data: searchedDeals, //renaming the data to "deals"
+    isLoading,
+    isSuccess,
+    isError,
+  } = useSearchAllDealsQuery({
+    name: searchParams.get(`name`) ?? "",
+    category: searchParams.get(`category`) ?? "",
+    location: searchParams.get(`location`) ?? "",
+  });
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    setSearchParams({
+      name: nameSearch,
+      category: selectedOption,
+      location: location,
+    });
+  };
+
   return (
     <Container>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Grid
           container
           spacing={0.5}
@@ -20,6 +47,9 @@ const SearchBar = () => {
               autoComplete="off"
               id="nameSearch"
               name="nameSearch"
+              onChange={(e: any) => {
+                setNameSearch(e.target.value);
+              }}
               type="text"
               label="Search for anything!"
               sx={{
@@ -28,7 +58,10 @@ const SearchBar = () => {
             />
           </Grid>
           <Grid item xs={12} sm={4} md={2}>
-            <CategoryField />
+            <CategoryField
+              selectedOption={selectedOption}
+              setSelectedOption={setSelectedOption}
+            />
           </Grid>
           <Grid item xs={12} sm={4} md={2}>
             <TextField
@@ -36,6 +69,9 @@ const SearchBar = () => {
               autoComplete="off"
               id="location"
               name="location"
+              onChange={(e: any) => {
+                setLocation(e.target.value);
+              }}
               type="text"
               label="Location"
               sx={{
@@ -45,7 +81,7 @@ const SearchBar = () => {
           </Grid>
           <Grid item xs={12} sm={4} md={2}>
             <Button
-              // type="submit"
+              type="submit"
               sx={{
                 backgroundColor: "#fbb002",
                 color: "#f2f2f2",
@@ -62,6 +98,7 @@ const SearchBar = () => {
           </Grid>
         </Grid>
       </form>
+      <pre>{JSON.stringify(searchedDeals)}</pre>
     </Container>
   );
 };

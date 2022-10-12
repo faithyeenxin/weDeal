@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, Dispatch } from "react";
 import {
   Box,
   FormControl,
@@ -16,8 +16,14 @@ import { ICategory } from "../Interface";
 const containsText = (text: any, searchText: any) =>
   text.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
 
-const CategoryField = () => {
-  const [selectedOption, setSelectedOption] = useState("");
+const CategoryField = ({
+  selectedOption,
+  setSelectedOption,
+}: {
+  selectedOption: string;
+  setSelectedOption: Dispatch<string>;
+}) => {
+  // const [selectedOption, setSelectedOption] = useState("");
   const [searchText, setSearchText] = useState("");
   const [allOptions, setAllOptions] = useState<ICategory[]>([]);
 

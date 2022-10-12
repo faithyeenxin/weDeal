@@ -17,6 +17,7 @@ import TextsmsIcon from "@mui/icons-material/Textsms";
 import EditIcon from "@mui/icons-material/Edit";
 import { IDeal } from "../Interface";
 import intervalToDuration from "date-fns/intervalToDuration";
+import differenceInMilliseconds from "date-fns/differenceInMilliseconds";
 import { useNavigate, useParams } from "react-router-dom";
 const positionSx = {
   display: "flex",
@@ -96,23 +97,69 @@ const MediaCardEdittable = ({ item }: MediaCardEdittableProps) => {
   return (
     <Card
       sx={{
-        width: 220,
+        width: 250,
         height: 410,
       }}
     >
-      <Typography sx={{ textAlign: "right", mr: 1 }}>
-        {uploadedTimeString}
-      </Typography>
+      <Grid container sx={{ p: 1 }}>
+        <Grid
+          item
+          xs={6}
+          sx={{
+            display: "flex",
+            justifyContent: "left",
+            alignItems: "left",
+            pt: 0.5,
+            pl: 1,
+          }}
+        >
+          <Typography
+            variant="body2"
+            sx={{
+              textAlign: "right",
+              mr: 1,
+              letterSpacing: 3,
+              fontWeight: 550,
+              color:
+                differenceInMilliseconds(
+                  new Date(item.dealExpiry),
+                  new Date()
+                ) > 0
+                  ? "#a1c060"
+                  : "#e9622a",
+            }}
+          >
+            {differenceInMilliseconds(new Date(item.dealExpiry), new Date()) > 0
+              ? "Active"
+              : "Expired"}
+          </Typography>
+        </Grid>
+        <Grid
+          item
+          xs={6}
+          sx={{
+            display: "flex",
+            justifyContent: "right",
+            alignItems: "right",
+            pt: 0.5,
+            pr: 1,
+          }}
+        >
+          <Typography variant="body2" sx={{ textAlign: "right", mr: 1 }}>
+            {uploadedTimeString}
+          </Typography>
+        </Grid>
+      </Grid>
       <CardMedia
         component="img"
         height="200"
         image={item?.DealImages[0]?.image}
         sx={{ mt: "5%", mb: "5%" }}
       />
-      <CardContent sx={{ height: "110px" }}>
+      <CardContent sx={{ height: "90px" }}>
         <Typography
           gutterBottom
-          variant="h5"
+          variant="h6"
           sx={{ fontFamily: "Arial", pb: 0, color: "#fbb002" }}
           component="div"
         >

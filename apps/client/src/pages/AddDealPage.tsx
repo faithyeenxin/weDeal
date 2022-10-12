@@ -68,7 +68,7 @@ const AddDealPage = () => {
     enableReinitialize: true,
     initialValues: {
       name: "",
-      uploadedImages: [""],
+      uploadedImages: [],
       retailPrice: "",
       discountedPrice: "",
       dealExpiry: "",
@@ -180,7 +180,6 @@ const AddDealPage = () => {
               >
                 UPLOAD IMAGES
               </Typography>
-
               <TextField
                 size="small"
                 id="uploadedImages"

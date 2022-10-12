@@ -58,12 +58,35 @@ router.get("/seed", async (req, res) => {
 //* Show All Deals
 router.get("/", async (req, res) => {
   const allDeals = await prisma.deal.findMany({
+    where: {
+      dealExpiry: {
+        gt: new Date(),
+      },
+    },
     include: {
       DealImages: true,
     },
     orderBy: { dealPostedDate: "desc" },
   });
   res.status(200).send(allDeals);
+});
+
+//* Show Deals By Search
+router.get("/search", async (req, res) => {
+  const { name, category, location } = req.query;
+
+  // const allDeals = await prisma.deal.findMany({
+  //   where: {
+  //     dealExpiry: {
+  //       gt: new Date(),
+  //     },
+  //   },
+  //   include: {
+  //     DealImages: true,
+  //   },
+  //   orderBy: { dealPostedDate: "desc" },
+  // });
+  res.status(200).send(req.query);
 });
 
 //* Show By ID
