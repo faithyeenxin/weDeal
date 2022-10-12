@@ -14,17 +14,17 @@ import {
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import TextsmsIcon from "@mui/icons-material/Textsms";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import EditIcon from "@mui/icons-material/Edit";
 import { IDeal } from "../Interface";
 import intervalToDuration from "date-fns/intervalToDuration";
-
+import { useNavigate, useParams } from "react-router-dom";
 const positionSx = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
 };
 
-interface MediaCardProps {
+interface MediaCardEdittableProps {
   item: IDeal;
 }
 
@@ -37,7 +37,9 @@ const uploadTimeFormat = {
   seconds: 0,
 };
 
-const MediaCard = ({ item }: MediaCardProps) => {
+const MediaCardEdittable = ({ item }: MediaCardEdittableProps) => {
+  const navigate = useNavigate();
+  const { id } = useParams();
   const today = new Date();
   const uploadTimeObject = intervalToDuration({
     start: new Date(item.dealPostedDate),
@@ -95,7 +97,7 @@ const MediaCard = ({ item }: MediaCardProps) => {
     <Card
       sx={{
         width: 220,
-        height: 435,
+        height: 410,
       }}
     >
       <Typography sx={{ textAlign: "right", mr: 1 }}>
@@ -107,7 +109,7 @@ const MediaCard = ({ item }: MediaCardProps) => {
         image={item?.DealImages[0]?.image}
         sx={{ mt: "5%", mb: "5%" }}
       />
-      <CardContent sx={{ height: "145px" }}>
+      <CardContent sx={{ height: "110px" }}>
         <Typography
           gutterBottom
           variant="h5"
@@ -154,38 +156,18 @@ const MediaCard = ({ item }: MediaCardProps) => {
       </CardContent>
       <CardActions>
         <Grid container>
-          <Grid item xs={6}>
-            <Grid container>
-              <Grid item md={4} sx={positionSx}>
-                <IconButton>
-                  <ThumbDownOffAltIcon sx={{ color: "red" }} />
-                </IconButton>
-              </Grid>
-              <Grid item md={4} sx={positionSx}>
-                <Typography variant="h5" sx={{ fontFamily: "Arial" }}>
-                  {Math.abs(item.totalUpvotes - item.totalDownvotes)}
-                </Typography>
-              </Grid>
-              <Grid item md={4} sx={positionSx}>
-                <IconButton>
-                  <ThumbUpOffAltIcon sx={{ color: "green" }} />
-                </IconButton>
-              </Grid>
-            </Grid>
-          </Grid>
-
           <Grid
             item
-            xs={6}
+            xs={12}
             sx={{
               display: "flex",
               justifyContent: "right",
-              alignItems: "center",
-              pr: 0.5,
+              alignItems: "right",
+              pr: 1,
             }}
           >
-            <IconButton>
-              <MoreHorizIcon />
+            <IconButton href={`/${id}/deal-edit/${item.id}`}>
+              <EditIcon />
             </IconButton>
           </Grid>
         </Grid>
@@ -194,4 +176,4 @@ const MediaCard = ({ item }: MediaCardProps) => {
   );
 };
 
-export default MediaCard;
+export default MediaCardEdittable;

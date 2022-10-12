@@ -19,7 +19,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import { ICategory } from "../Interface";
 
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import format from "date-fns/format";
 import { DetailsRounded } from "@mui/icons-material";
 
@@ -32,11 +32,10 @@ const AddDealPage = () => {
   const [savings, setSavings] = useState(0);
   const [savingsDisplay, setSavingsDisplay] = useState("");
   const { id } = useParams();
+  const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState("");
   const [searchText, setSearchText] = useState("");
   const [allOptions, setAllOptions] = useState<ICategory[]>([]);
-  const [uploadedImagesArray, setUploadedImagesArray] = useState([]);
-
   const displayedOptions = useMemo(
     () => allOptions.filter((option) => containsText(option.name, searchText)),
     [searchText, allOptions]
@@ -78,7 +77,13 @@ const AddDealPage = () => {
     },
     validationSchema: Yup.object().shape({
       name: Yup.string().required("Name of deal required"),
-      uploadedImages: Yup.mixed().required("A file is required"),
+      uploadedImages: Yup.mixed()
+        .required("A file is required")
+        .test(
+          "numOfFiles",
+          "Maximum upload of 3 images",
+          (value: any) => value.length <= 3
+        ),
       retailPrice: Yup.number().required("Required"),
       discountedPrice: Yup.number().required("Required"),
       dealExpiry: Yup.date()
@@ -125,7 +130,10 @@ const AddDealPage = () => {
           console.log(body.uploadedImages);
           return axios.post(`/api/deal`, body);
         })
-        .then((res) => console.log(res.data))
+        .then((res) => {
+          console.log(res.data);
+          navigate(`/${id}/home`);
+        })
         .catch((err) => console.log(err));
     },
   });
@@ -295,7 +303,7 @@ const AddDealPage = () => {
               <TextField
                 required
                 size="small"
-                type="datetime-local"
+                type="date"
                 id="dealExpiry"
                 name="dealExpiry"
                 onChange={formik.handleChange}

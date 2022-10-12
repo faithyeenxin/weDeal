@@ -61,6 +61,7 @@ router.get("/", async (req, res) => {
     include: {
       DealImages: true,
     },
+    orderBy: { dealPostedDate: "desc" },
   });
   res.status(200).send(allDeals);
 });
@@ -71,6 +72,9 @@ router.get("/:id", async (req, res) => {
   const deal = await prisma.deal.findUnique({
     where: {
       id: id,
+    },
+    include: {
+      DealImages: true,
     },
   });
   res.status(200).send(deal);
@@ -154,21 +158,64 @@ router.post("/", async (req, res) => {
 });
 
 //* Update
-router.put("/:id", async (req, res) => {
-  const { id } = req.params;
-  const updatedData = req.body;
+router.patch("/:id", async (req, res) => {
+  const { id, name, retailPrice, discountedPrice, location, dealExpiry } =
+    req.body;
+
   const deal = await prisma.deal.update({
     where: {
       id: id,
     },
-    data: updatedData,
+    data: {
+      name: name,
+      retailPrice: retailPrice,
+      discountedPrice: discountedPrice,
+      location: location,
+      dealExpiry: dealExpiry,
+      dealPostedDate: new Date(),
+    },
+  });
+  res.status(200).send(deal);
+});
+
+//* Update Upvote
+router.patch("/upvote/:id", async (req, res) => {
+  const { id } = req.params;
+
+  const deal = await prisma.deal.update({
+    where: {
+      id: id,
+    },
+    data: {
+      totalUpvotes: { increment: 1 },
+    },
+  });
+  res.status(200).send(deal);
+});
+
+//* Update Downvote
+router.patch("/downvote/:id", async (req, res) => {
+  const { id } = req.params;
+  const deal = await prisma.deal.update({
+    where: {
+      id: id,
+    },
+    data: {
+      totalDownvotes: { increment: 1 },
+    },
   });
   res.status(200).send(deal);
 });
 
 //* Delete
+
+//* 1) delete images
+//* 2) delete deal
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
+  const deletedImages = await prisma.dealImages.deleteMany({
+    where: { dealId: id },
+  });
   const deletedDeal = await prisma.deal.delete({
     where: {
       id: id,

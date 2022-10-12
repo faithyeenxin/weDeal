@@ -53,7 +53,7 @@ const LoggedOnNavBar = (props: any) => {
                 } else if (item === "Add Deal") {
                   navigate(`/${id}/add-deal`);
                 } else {
-                  navigate(`/${item.toLowerCase()}`);
+                  navigate(`/${id}/${item.toLowerCase()}`);
                 }
               }}
             >
@@ -87,7 +87,6 @@ const LoggedOnNavBar = (props: any) => {
             variant="h2"
             sx={{
               color: "#fbb002",
-              fontWeight: "bold",
               cursor: "pointer",
               flexGrow: 1,
             }}

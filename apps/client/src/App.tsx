@@ -11,6 +11,8 @@ import UserProfile from "./pages/UserProfile";
 import LoggedOnNavBar from "./UIUX/LoggedOnNavBar";
 import NavBar from "./UIUX/NavBar";
 import PrivateRoute from "./UIUX/PrivateRoute";
+import DealPage from "./pages/DealPage";
+import DealPageEdittable from "./pages/DealPageEdittable";
 function App() {
   return (
     <BrowserRouter>
@@ -30,6 +32,11 @@ function App() {
           <Route path="/:id/home" element={<HomePage />} />
           <Route path="/:id/profile" element={<UserProfile />} />
           <Route path="/:id/add-deal" element={<AddDealPage />} />
+          <Route path="/:id/deal/:dealid" element={<DealPage />} />
+          <Route
+            path="/:id/deal-edit/:dealid"
+            element={<DealPageEdittable />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

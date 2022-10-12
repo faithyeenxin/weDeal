@@ -16,7 +16,7 @@ const RegisterRedirect: FC = () => {
       }}
     >
       <Typography variant="h3" sx={{ textAlign: "center", fontWeight: "600" }}>
-        Oh no! You do not have access to this page!
+        Oh no!
       </Typography>
       <Typography
         variant="h5"

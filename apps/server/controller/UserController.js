@@ -73,6 +73,12 @@ router.get("/:id", async (req, res) => {
     where: {
       id: id,
     },
+    include: {
+      Deals: {
+        orderBy: { dealPostedDate: "desc" },
+        include: { DealImages: true },
+      },
+    },
   });
   res.status(200).send(user);
 });

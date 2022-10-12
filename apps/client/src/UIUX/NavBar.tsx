@@ -41,7 +41,6 @@ const NavBar = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              mb: "1%",
             }}
             // spacing={2}
           >
@@ -63,7 +62,6 @@ const NavBar = () => {
                 variant="h2"
                 sx={{
                   color: "#fbb002",
-                  fontWeight: "bold",
                   cursor: "pointer",
                   flexGrow: 1,
                 }}

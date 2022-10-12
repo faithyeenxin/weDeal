@@ -6,7 +6,7 @@ export interface IDeal {
   discountedPrice: number;
   location: string;
   dealLocation: string;
-  dealPostedDate: string;
+  dealPostedDate: Date;
   dealExpiry: Date;
   categoryId: string;
   totalUpvotes: number;
@@ -22,4 +22,14 @@ export interface IDealImages {
 export interface ICategory {
   id: string;
   name: string;
+}
+
+export interface IUser {
+  username: string;
+  password: string;
+  name: string;
+  image: string;
+  email: string;
+  dateJoined: Date;
+  Deals?: IDeal[];
 }

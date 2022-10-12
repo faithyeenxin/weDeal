@@ -1,9 +1,9 @@
-import SearchBar from "../components/SearchBar";
+import DealPage from "./DealPage";
 
 const Testing = () => {
   return (
     <>
-      <SearchBar />
+      <DealPage />
     </>
   );
 };

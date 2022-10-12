@@ -1,38 +1,74 @@
+import { useGetAllDealsQuery } from "../features/api/apiSlice";
+
 import { Card, Grid, Paper, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import Image from "../../public/happy-shopping.jpeg";
-import MediaCard from "../components/MediaCard";
+import MediaCard from "../features/mediaCard/MediaCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { IDeal } from "../Interface";
+import { json } from "react-router-dom";
+import MediaCardDisplayOnly from "../components/MediaCardDisplayOnly";
 
 const LandingPage = () => {
-  const [allDeals, setAllDeals] = useState<IDeal[]>([]);
+  // const [allDeals, setAllDeals] = useState<IDeal[]>([]);
 
-  useEffect(() => {
-    axios
-      .get(`/api/deal`)
-      .then((res) => {
-        setAllDeals(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const {
+    data: deals, //renaming the data to "deals"
+    isLoading,
+    isSuccess,
+    isError,
+  } = useGetAllDealsQuery(null, { pollingInterval: 3000 });
 
+  let content;
+
+  if (isLoading) {
+    content = <p>Loading...</p>;
+  } else if (isSuccess) {
+    content = (
+      <Grid
+        container
+        rowSpacing={3}
+        columnSpacing={1}
+        sx={{
+          display: "flex",
+        }}
+      >
+        {deals.map((item) => {
+          return (
+            <Grid
+              item
+              key={item.id}
+              xs={12}
+              sm={6}
+              md={3}
+              lg={2.4}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <MediaCardDisplayOnly item={item} />
+            </Grid>
+          );
+        })}
+      </Grid>
+    );
+  } else if (isError) {
+    content = <p>There's an error</p>;
+  }
   return (
     <>
       <Paper
         sx={{
-          padding: "45vh 0vh 27vh 0vh",
+          padding: "45vh 0vh 18vh 0vh",
           backgroundImage: `url(${Image})`,
           backgroundSize: "cover",
           backgroundPosition: "center center",
-          // borderRadius: "2%",
-
           mt: -1,
           mr: -1,
           ml: -1,
-          mb: 2,
         }}
       >
         <Container>
@@ -65,46 +101,7 @@ const LandingPage = () => {
           <br />
         </Container>
       </Paper>
-      <Container
-        sx={{
-          // backgroundColor: "#f1f2f2",
-          pt: "1%",
-          pb: "1%",
-          pl: "2.5%",
-          pr: "2.5%",
-          mr: "2%",
-          ml: "2%",
-        }}
-      >
-        <Grid
-          container
-          rowSpacing={3}
-          columnSpacing={2}
-          sx={{
-            display: "flex",
-          }}
-        >
-          {allDeals.map((item) => {
-            return (
-              <Grid
-                item
-                key={item.id}
-                xs={12}
-                sm={6}
-                md={3}
-                lg={2.4}
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <MediaCard item={item} />
-              </Grid>
-            );
-          })}
-        </Grid>
-      </Container>
+      <Container sx={{ mt: 5, mb: 5 }}>{content}</Container>
     </>
   );
 };
