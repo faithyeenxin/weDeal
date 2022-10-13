@@ -2,11 +2,8 @@
   "name": "04_wedeal_final",
   "version": "1.0.0",
   "description": "",
-  "dependencies": {
-  },
   "devDependencies": {
-    "turbo": "^1.5.5",
-    "turbo-darwin-arm64": "^1.5.5"
+    "turbo": "^1.5.5"
   },
   "workspaces": [
     "packages/*",
