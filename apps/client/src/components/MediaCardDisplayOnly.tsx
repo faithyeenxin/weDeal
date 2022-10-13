@@ -41,6 +41,7 @@ const uploadTimeFormat = {
 };
 
 const MediaCardDisplayOnly = ({ item }: MediaCardDisplayOnlyProps) => {
+  console.log("media card displaying");
   const navigate = useNavigate();
   const { id } = useParams();
   const today = new Date();

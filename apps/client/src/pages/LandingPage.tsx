@@ -11,6 +11,7 @@ import { json } from "react-router-dom";
 import MediaCardDisplayOnly from "../components/MediaCardDisplayOnly";
 
 const LandingPage = () => {
+  console.log("landing page loaded");
   const {
     data: deals, //renaming the data to "deals"
     isLoading,

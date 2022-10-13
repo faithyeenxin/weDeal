@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT ?? 3000;
 const cloudinary = require("cloudinary");
 const multer = require("multer");
-const path = require("path");
+// const path = require("path");
 
 //////////////////////////////////////////////////////
 //// * Controllers
@@ -92,9 +92,9 @@ app.get("/", (req, res) => {
   res.send("This is my backend home route!");
 });
 
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/dist", "index.html"));
-});
+// app.get("/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "./client/dist", "index.html"));
+// });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
