@@ -56,7 +56,7 @@ const RegistrationForm: FC = () => {
         .then((res) => {
           sessionStorage.setItem("token", res.data.token);
           const payload = parseJwt(res.data.token);
-          navigate(`/${payload.id}/home`);
+          navigate(`/home`);
         })
         .catch((error) => setError(error.response.data.err));
     },
