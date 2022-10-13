@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "build": "turbo build",
-    "start": "cd apps/server && npm run start"
+    "start": "cd apps/server && npm run start",
+    "generate": "cd apps/server && npx prisma generate"
   },
   "author": "",
   "license": "ISC",
