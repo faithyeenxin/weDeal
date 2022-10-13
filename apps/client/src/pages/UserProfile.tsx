@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IUser } from "../Interface";
 import format from "date-fns/format";
-import MediaCard from "../features/mediaCard/MediaCard";
+import MediaCard from "../components/MediaCard";
 import { Box } from "@mui/system";
 import { IDeal } from "../Interface";
 import MediaCardEdittable from "../components/MediaCardEdittabe";

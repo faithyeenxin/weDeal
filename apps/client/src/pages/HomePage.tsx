@@ -7,7 +7,7 @@ import axios from "axios";
 import SearchBar from "../components/SearchBar";
 import { IDeal } from "../Interface";
 import { Box, Grid, Typography } from "@mui/material";
-import MediaCard from "../features/mediaCard/MediaCard";
+import MediaCard from "../components/MediaCard";
 import { Container } from "@mui/system";
 import { useParams } from "react-router-dom";
 const Home = () => {

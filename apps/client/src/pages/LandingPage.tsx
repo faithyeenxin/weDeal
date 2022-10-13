@@ -3,7 +3,7 @@ import { useGetAllDealsQuery } from "../features/api/apiSlice";
 import { Card, Grid, Paper, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import Image from "../../public/happy-shopping.jpeg";
-import MediaCard from "../features/mediaCard/MediaCard";
+import MediaCard from "../components/MediaCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { IDeal } from "../Interface";

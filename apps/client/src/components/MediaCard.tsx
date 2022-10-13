@@ -2,7 +2,7 @@ import {
   useGetAllDealsQuery,
   useAddDownvoteMutation,
   useAddUpvoteMutation,
-} from "../api/apiSlice";
+} from "../features/api/apiSlice";
 
 import * as React from "react";
 import {
@@ -21,7 +21,7 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import TextsmsIcon from "@mui/icons-material/Textsms";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { IDeal } from "../../Interface";
+import { IDeal } from "../Interface";
 import intervalToDuration from "date-fns/intervalToDuration";
 import { useNavigate, useParams } from "react-router-dom";
 const positionSx = {
