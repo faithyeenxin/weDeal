@@ -66,11 +66,12 @@ const RegistrationForm: FC = () => {
       <form onSubmit={formik.handleSubmit}>
         <Grid
           container
-          spacing={5}
+          spacing={1}
           sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            p: 4,
           }}
         >
           <Grid item xs={12}>
@@ -141,6 +142,7 @@ const RegistrationForm: FC = () => {
               id="password"
               autoComplete="off"
               name="password"
+              type="password"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               sx={{ width: "100%" }}

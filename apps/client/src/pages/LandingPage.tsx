@@ -40,7 +40,6 @@ const LandingPage = () => {
               xs={12}
               sm={6}
               md={3}
-              lg={2.4}
               sx={{
                 display: "flex",
                 justifyContent: "center",

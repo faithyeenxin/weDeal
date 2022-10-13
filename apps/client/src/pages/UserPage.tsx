@@ -15,8 +15,8 @@ import MediaCard from "../features/mediaCard/MediaCard";
 import { Box } from "@mui/system";
 import { IDeal } from "../Interface";
 import MediaCardEdittable from "../components/MediaCardEdittabe";
-const UserProfile = () => {
-  const { id } = useParams();
+const UserPage = () => {
+  const { userid } = useParams();
   const [upvotes, setUpvotes] = useState();
   const [user, setUser] = useState<IUser>({
     id: "",
@@ -30,7 +30,7 @@ const UserProfile = () => {
   });
   useEffect(() => {
     axios
-      .get(`/api/user/${id}`)
+      .get(`/api/user/${userid}`)
       .then((res) => {
         setUser(res.data);
         setUpvotes(
@@ -53,19 +53,6 @@ const UserProfile = () => {
           borderRadius: "2%",
         }}
       >
-        <Typography
-          variant="h3"
-          sx={{
-            fontFamily: "Futura",
-            color: "#fbb002",
-            fontWeight: "bold",
-            letterSpacing: 6,
-            mt: 2,
-          }}
-          align="center"
-        >
-          Your Profile Details
-        </Typography>
         <Grid container spacing={3}>
           <Grid
             item
@@ -177,7 +164,7 @@ const UserProfile = () => {
                     alignItems: "center",
                   }}
                 >
-                  <MediaCardEdittable item={deal} />
+                  <MediaCard item={deal} />
                 </Grid>
               );
             })}
@@ -188,4 +175,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default UserPage;

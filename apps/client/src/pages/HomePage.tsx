@@ -1,4 +1,6 @@
 import { useGetAllDealsQuery } from "../features/api/apiSlice";
+import { useSearchAllDealsQuery } from "../features/api/apiSlice";
+import { useSearchParams } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -10,13 +12,24 @@ import { Container } from "@mui/system";
 import { useParams } from "react-router-dom";
 const Home = () => {
   const { id } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const {
     data: deals, //renaming the data to "deals"
     isLoading,
     isSuccess,
     isError,
-  } = useGetAllDealsQuery(null, { pollingInterval: 3000 });
+  } = useSearchAllDealsQuery(
+    {
+      name: searchParams.get(`name`) ?? "",
+      category: searchParams.get(`category`) ?? "",
+      location: searchParams.get(`location`) ?? "",
+    },
+    { pollingInterval: 3000 }
+  );
 
+  // to add back in polling once done with testing
+  // useGetAllDealsQuery(null, { pollingInterval: 5000 });
   let content;
 
   if (isLoading) {
@@ -32,6 +45,7 @@ const Home = () => {
         }}
       >
         {deals.map((item) => {
+          console.log(item);
           return (
             <Grid
               item
@@ -65,7 +79,7 @@ const Home = () => {
           variant="h3"
           sx={{
             fontWeight: "bold",
-            mb: 5,
+            mb: 3,
             letterSpacing: "0.025rem",
             fontStyle: "italic",
             color: "#fbb001",
@@ -75,7 +89,7 @@ const Home = () => {
         </Typography>
         <Grid
           container
-          spacing={1}
+          spacing={0.5}
           sx={{
             display: "flex",
           }}

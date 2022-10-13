@@ -98,6 +98,7 @@ const AddDealPage = () => {
 
     onSubmit: (values: any) => {
       console.log(values);
+      alert("please wait as we add deal!");
       const categoryItem = allOptions.filter((option, index) => {
         return option.name === values.categoryName;
       });

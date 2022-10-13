@@ -74,19 +74,28 @@ router.get("/", async (req, res) => {
 //* Show Deals By Search
 router.get("/search", async (req, res) => {
   const { name, category, location } = req.query;
+  const searchedDeals = await prisma.deal.findMany({
+    where: {
+      name: {
+        contains: name,
+        mode: "insensitive",
+      },
+      categoryId: {
+        contains: category,
+      },
+      location: { contains: location, mode: "insensitive" },
+      dealExpiry: {
+        gt: new Date(),
+      },
+    },
+    include: {
+      DealImages: true,
+      category: true,
+    },
+    orderBy: { dealPostedDate: "desc" },
+  });
 
-  // const allDeals = await prisma.deal.findMany({
-  //   where: {
-  //     dealExpiry: {
-  //       gt: new Date(),
-  //     },
-  //   },
-  //   include: {
-  //     DealImages: true,
-  //   },
-  //   orderBy: { dealPostedDate: "desc" },
-  // });
-  res.status(200).send(req.query);
+  res.status(200).send(searchedDeals);
 });
 
 //* Show By ID

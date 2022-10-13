@@ -99,8 +99,8 @@ const MediaCardDisplayOnly = ({ item }: MediaCardDisplayOnlyProps) => {
   return (
     <Card
       sx={{
-        width: 220,
-        height: 410,
+        width: 250,
+        height: 430,
       }}
     >
       <Grid container sx={{ mt: 2, mb: 2 }}>
@@ -140,7 +140,7 @@ const MediaCardDisplayOnly = ({ item }: MediaCardDisplayOnlyProps) => {
         image={item?.DealImages[0]?.image}
         sx={{ mt: "5%", mb: "5%" }}
       />
-      <CardContent sx={{ height: "95px" }}>
+      <CardContent sx={{ height: "113px" }}>
         <Typography
           gutterBottom
           variant="h6"

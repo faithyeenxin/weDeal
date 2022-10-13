@@ -19,11 +19,12 @@ export const apiSlice = createApi({
     >({
       query: (arg) => {
         const { name, category, location } = arg;
-        console.log(name);
         return {
-          url: `/deal/search?name=${name}&category=${category}&location=${location}`,
+          url: `/deal/search`,
+          params: { name, category, location },
         };
       },
+      providesTags: [`Deals`],
     }),
     addUpvote: builder.mutation({
       query: (id) => ({

@@ -91,6 +91,7 @@ const LoginForm: FC = () => {
               id="password"
               autoComplete="off"
               name="password"
+              type="password"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.password}

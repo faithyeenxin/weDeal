@@ -5,10 +5,10 @@ import { useSearchAllDealsQuery } from "../features/api/apiSlice";
 import { useSearchParams } from "react-router-dom";
 const SearchBar = () => {
   const [nameSearch, setNameSearch] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
+
   const [location, setLocation] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const [categoryId, setCategoryId] = useState("");
   const {
     data: searchedDeals, //renaming the data to "deals"
     isLoading,
@@ -24,7 +24,7 @@ const SearchBar = () => {
     e.preventDefault();
     setSearchParams({
       name: nameSearch,
-      category: selectedOption,
+      category: categoryId,
       location: location,
     });
   };
@@ -58,10 +58,7 @@ const SearchBar = () => {
             />
           </Grid>
           <Grid item xs={12} sm={4} md={2}>
-            <CategoryField
-              selectedOption={selectedOption}
-              setSelectedOption={setSelectedOption}
-            />
+            <CategoryField setCategoryId={setCategoryId} />
           </Grid>
           <Grid item xs={12} sm={4} md={2}>
             <TextField
@@ -98,7 +95,6 @@ const SearchBar = () => {
           </Grid>
         </Grid>
       </form>
-      <pre>{JSON.stringify(searchedDeals)}</pre>
     </Container>
   );
 };

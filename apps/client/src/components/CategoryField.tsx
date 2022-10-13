@@ -17,16 +17,14 @@ const containsText = (text: any, searchText: any) =>
   text.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
 
 const CategoryField = ({
-  selectedOption,
-  setSelectedOption,
+  setCategoryId,
 }: {
-  selectedOption: string;
-  setSelectedOption: Dispatch<string>;
+  setCategoryId: Dispatch<string>;
 }) => {
   // const [selectedOption, setSelectedOption] = useState("");
   const [searchText, setSearchText] = useState("");
   const [allOptions, setAllOptions] = useState<ICategory[]>([]);
-
+  const [selectedOption, setSelectedOption] = useState("");
   const displayedOptions = useMemo(
     () => allOptions.filter((option) => containsText(option.name, searchText)),
     [searchText, allOptions]
@@ -50,11 +48,14 @@ const CategoryField = ({
         id="search-select"
         value={selectedOption}
         label="Options"
-        onChange={(e) => {
+        onChange={(e, child: any) => {
           if (e.target.value === "-") {
             setSelectedOption("");
+            setCategoryId("");
           } else {
+            let obj = allOptions.find((option) => option.id === e.target.value);
             setSelectedOption(e.target.value);
+            setCategoryId(child?.props.id);
           }
         }}
         onClose={() => setSearchText("")}
@@ -89,7 +90,7 @@ const CategoryField = ({
           />
         </ListSubheader>
         {displayedOptions.map((option, i) => (
-          <MenuItem key={i} value={option.name}>
+          <MenuItem key={i} id={option.id} value={option.name}>
             {option.name}
           </MenuItem>
         ))}

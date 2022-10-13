@@ -163,7 +163,7 @@ const MediaCardEdittable = ({ item }: MediaCardEdittableProps) => {
           sx={{ fontFamily: "Arial", pb: 0, color: "#fbb002" }}
           component="div"
         >
-          {item.name.slice(0, 45)}...
+          {item.name.slice(0, 40)}...
         </Typography>
         <Grid container spacing={1} sx={{ mb: 1 }}>
           <Grid item>

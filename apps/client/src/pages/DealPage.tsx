@@ -14,8 +14,9 @@ import { IDeal, IUser } from "../Interface";
 import format from "date-fns/format";
 
 const DealPage = () => {
-  const { dealid } = useParams();
+  const { id, dealid } = useParams();
   const [user, setUser] = useState<IUser>({
+    id: "",
     username: "",
     password: "",
     name: "",
@@ -324,7 +325,10 @@ const DealPage = () => {
             <Grid container rowSpacing={1}>
               <Grid item xs={12}>
                 <Typography variant="h5">
-                  Deal Shared By: @{user.name}
+                  Deal Shared By:{" "}
+                  <a href={`/${id}/deal/${dealid}/user/${user.id}`}>
+                    @{user.name}
+                  </a>
                 </Typography>
               </Grid>
               <Grid item xs={12}>

@@ -90,7 +90,7 @@ router.post("/", async (req, res) => {
   res.status(200).send(category);
 });
 
-//* Update (not sure why this cannot work)
+//* Update
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const updatedData = req.body;
@@ -103,7 +103,7 @@ router.put("/:id", async (req, res) => {
   res.status(200).send(category);
 });
 
-//* Delete (not sure why this cannot work)
+//* Delete
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   const deletedCategory = await prisma.user.delete({
