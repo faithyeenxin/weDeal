@@ -3,6 +3,7 @@ const app = express();
 const port = process.env.PORT ?? 3000;
 const cloudinary = require("cloudinary");
 const multer = require("multer");
+const path = require("path");
 
 //////////////////////////////////////////////////////
 //// * Controllers
@@ -89,6 +90,10 @@ app.post(
 
 app.get("/", (req, res) => {
   res.send("This is my backend home route!");
+});
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/dist", "index.html"));
 });
 
 app.listen(port, () => {
