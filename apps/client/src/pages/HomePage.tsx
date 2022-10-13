@@ -25,7 +25,7 @@ const Home = () => {
       category: searchParams.get(`category`) ?? "",
       location: searchParams.get(`location`) ?? "",
     },
-    { pollingInterval: 3000 }
+    { pollingInterval: 2000 }
   );
 
   // to add back in polling once done with testing
@@ -53,7 +53,6 @@ const Home = () => {
               xs={12}
               sm={6}
               md={3}
-              lg={2.4}
               sx={{
                 display: "flex",
                 justifyContent: "center",

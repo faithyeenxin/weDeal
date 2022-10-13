@@ -97,8 +97,8 @@ const MediaCardEdittable = ({ item }: MediaCardEdittableProps) => {
   return (
     <Card
       sx={{
-        width: 250,
-        height: 410,
+        width: 260,
+        height: 420,
       }}
     >
       <Grid container sx={{ p: 1 }}>
@@ -156,7 +156,7 @@ const MediaCardEdittable = ({ item }: MediaCardEdittableProps) => {
         image={item?.DealImages[0]?.image}
         sx={{ mt: "5%", mb: "5%" }}
       />
-      <CardContent sx={{ height: "90px" }}>
+      <CardContent sx={{ height: "100px" }}>
         <Typography
           gutterBottom
           variant="h6"
@@ -213,7 +213,7 @@ const MediaCardEdittable = ({ item }: MediaCardEdittableProps) => {
               pr: 1,
             }}
           >
-            <IconButton href={`/${id}/deal-edit/${item.id}`}>
+            <IconButton href={`/deal-edit/${item.id}`}>
               <EditIcon />
             </IconButton>
           </Grid>

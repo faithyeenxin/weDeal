@@ -23,7 +23,6 @@ const drawerWidth = 240;
 const navItems = ["Profile", "Add Deal", "LogOut"];
 
 const LoggedOnNavBar = (props: any) => {
-  const { id } = useParams();
   const { window } = props;
 
   const navigate = useNavigate();
@@ -51,9 +50,9 @@ const LoggedOnNavBar = (props: any) => {
                   sessionStorage.clear();
                   navigate("/");
                 } else if (item === "Add Deal") {
-                  navigate(`/${id}/add-deal`);
+                  navigate(`/add-deal`);
                 } else {
-                  navigate(`/${id}/${item.toLowerCase()}`);
+                  navigate(`/${item.toLowerCase()}`);
                 }
               }}
             >
@@ -91,7 +90,7 @@ const LoggedOnNavBar = (props: any) => {
               flexGrow: 1,
             }}
             onClick={() => {
-              navigate(`/${id}/home`);
+              navigate(`/home`);
             }}
           >
             weDeal

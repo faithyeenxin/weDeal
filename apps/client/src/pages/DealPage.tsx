@@ -286,6 +286,19 @@ const DealPage = () => {
                     }}
                   />
                 </Grid>
+                <Grid item xs={12}>
+                  <Typography variant="body2" sx={{ mb: "0.5rem" }}>
+                    Location Address
+                  </Typography>
+                  <TextField
+                    disabled
+                    size="small"
+                    value={deal?.locationAddress}
+                    sx={{
+                      width: "100%",
+                    }}
+                  />
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
@@ -325,10 +338,7 @@ const DealPage = () => {
             <Grid container rowSpacing={1}>
               <Grid item xs={12}>
                 <Typography variant="h5">
-                  Deal Shared By:{" "}
-                  <a href={`/${id}/deal/${dealid}/user/${user.id}`}>
-                    @{user.name}
-                  </a>
+                  Deal Shared By: <a href={`/user/${user.id}`}>@{user.name}</a>
                 </Typography>
               </Grid>
               <Grid item xs={12}>

@@ -17,10 +17,13 @@ import { IDeal, IUser } from "../Interface";
 import format from "date-fns/format";
 
 const DealPageEdittable = () => {
+  const [locationStatus, setLocationStatus] = useState("");
+  const [locationDetail, setLocationDetails] = useState<any>();
   const navigate = useNavigate();
   const [offEditMode, setOffEditMode] = useState<boolean>(true);
   const { id, dealid } = useParams();
   const [user, setUser] = useState<IUser>({
+    id: "",
     username: "",
     password: "",
     name: "",
@@ -95,17 +98,38 @@ const DealPageEdittable = () => {
       discountedPrice: Yup.number().required("Required"),
       retailPrice: Yup.number().required("Required"),
       dealExpiry: Yup.date().required("Required"),
-      // location: Yup.string().required("Required"),
+      location: Yup.string()
+        .required("Required")
+        .test(
+          "location-exist",
+          "Location does not exist",
+          (location: any): boolean => {
+            axios
+              .get(
+                `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDBh_veIl8kLIgp2gCyglYDvnl-d0EK9CU&address=${location}`
+              )
+              .then((res) => {
+                setLocationStatus(res.data.status);
+                setLocationDetails(res.data);
+                console.log(res.data);
+              })
+              .catch((err) => console.log(err));
+            return locationStatus === "OK" ? true : false;
+          }
+        ),
     }),
 
     onSubmit: (values: any) => {
-      console.log(values);
+      setLocationStatus("OK");
       const body = {
         id: dealid,
         name: values.name,
         retailPrice: Number(values.retailPrice),
         discountedPrice: Number(values.discountedPrice),
         location: values.location,
+        locationAddress: locationDetail.results[0].formatted_address,
+        locationLat: locationDetail.results[0].geometry.location.lat,
+        locationLong: locationDetail.results[0].geometry.location.lng,
         dealExpiry: new Date(values.dealExpiry),
       };
       if (offEditMode) {
@@ -117,7 +141,7 @@ const DealPageEdittable = () => {
           .then((res) => {
             console.log(res.data);
             alert("Your deal has been updated");
-            navigate(`/${id}/home`);
+            navigate(`/home`);
           })
           .catch((err) => console.log(err));
       }
@@ -130,7 +154,7 @@ const DealPageEdittable = () => {
       .then((res) => {
         console.log(res.data);
         alert("deal has been deleted");
-        navigate(`/${id}/home`);
+        navigate(`/home`);
       })
       .catch((err) => console.log(err));
   };
@@ -363,6 +387,16 @@ const DealPageEdittable = () => {
                         width: "100%",
                       }}
                     />
+                    {formik.touched.location && formik.errors.location ? (
+                      <div>{formik.errors.location}</div>
+                    ) : null}
+                    {locationStatus === "OK" ? (
+                      <Typography variant="body2" sx={{ p: 0.7 }}>
+                        {JSON.stringify(
+                          locationDetail.results[0].formatted_address
+                        ).replace(/['"]+/g, "")}
+                      </Typography>
+                    ) : null}
                   </Grid>
                   <Grid
                     item

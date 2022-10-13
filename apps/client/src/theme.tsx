@@ -1,6 +1,4 @@
 import { createTheme, Theme } from "@mui/material";
-
-import backgroundTexture from "../src/background_texture.jpg";
 const theme: Theme = createTheme({
   palette: {
     secondary: {

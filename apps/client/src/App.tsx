@@ -30,16 +30,13 @@ function App() {
 
         {/* private routes */}
         <Route path="/" element={<PrivateRoute outlet={<LoggedOnNavBar />} />}>
-          <Route path="/:id/home" element={<HomePage />} />
-          <Route path="/:id/profile" element={<UserProfile />} />
-          <Route path="/:id/add-deal" element={<AddDealPage />} />
-          <Route path="/:id/deal/:dealid" element={<DealPage />} />
-          <Route path="/:id/deal/:dealid/user/:userid" element={<UserPage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/add-deal" element={<AddDealPage />} />
+          <Route path="/deal/:dealid" element={<DealPage />} />
+          <Route path="/user/:userid" element={<UserPage />} />
 
-          <Route
-            path="/:id/deal-edit/:dealid"
-            element={<DealPageEdittable />}
-          />
+          <Route path="/deal-edit/:dealid" element={<DealPageEdittable />} />
         </Route>
       </Routes>
     </BrowserRouter>

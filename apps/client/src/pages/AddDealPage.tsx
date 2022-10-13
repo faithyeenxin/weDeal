@@ -22,20 +22,26 @@ import { ICategory } from "../Interface";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import format from "date-fns/format";
 import { DetailsRounded } from "@mui/icons-material";
+import parseJwt from "../UIUX/parseJwt";
 
 const containsText = (text: any, searchText: any) =>
   text.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
 
 const AddDealPage = () => {
+  const token: any = sessionStorage.getItem("token");
+  const payload = parseJwt(token);
+  const id = payload.id;
   const [retailPrice, setRetailPrice] = useState(0);
   const [discountedPrice, setDiscountedPrice] = useState(0);
   const [savings, setSavings] = useState(0);
   const [savingsDisplay, setSavingsDisplay] = useState("");
-  const { id } = useParams();
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState("");
   const [searchText, setSearchText] = useState("");
   const [allOptions, setAllOptions] = useState<ICategory[]>([]);
+  const [locationStatus, setLocationStatus] = useState("");
+  const [locationDetail, setLocationDetails] = useState<any>();
+
   const displayedOptions = useMemo(
     () => allOptions.filter((option) => containsText(option.name, searchText)),
     [searchText, allOptions]
@@ -92,7 +98,25 @@ const AddDealPage = () => {
           `Date should be equal or later than ${new Date().toLocaleDateString()}`
         )
         .required("Required"),
-      location: Yup.string().required("Required"),
+      location: Yup.string()
+        .required("Required")
+        .test(
+          "location-exist",
+          "Location does not exist",
+          (location: any): boolean => {
+            axios
+              .get(
+                `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDBh_veIl8kLIgp2gCyglYDvnl-d0EK9CU&address=${location}`
+              )
+              .then((res) => {
+                setLocationStatus(res.data.status);
+                console.log(res.data);
+                setLocationDetails(res.data);
+              })
+              .catch((err) => console.log(err));
+            return locationStatus === "OK" ? true : false;
+          }
+        ),
       categoryName: Yup.string().required("Required"),
     }),
 
@@ -124,6 +148,9 @@ const AddDealPage = () => {
             retailPrice: values.retailPrice,
             discountedPrice: values.discountedPrice,
             location: values.location,
+            locationAddress: locationDetail.results[0].formatted_address,
+            locationLat: locationDetail.results[0].geometry.location.lat,
+            locationLong: locationDetail.results[0].geometry.location.lng,
             dealExpiry: new Date(values.dealExpiry),
             categoryId: categoryItem[0].id,
             uploadedImages: res.data.imageLinks,
@@ -133,7 +160,7 @@ const AddDealPage = () => {
         })
         .then((res) => {
           console.log(res.data);
-          navigate(`/${id}/home`);
+          navigate(`/home`);
         })
         .catch((err) => console.log(err));
     },
@@ -165,6 +192,7 @@ const AddDealPage = () => {
                 size="small"
                 id="name"
                 name="name"
+                autoComplete="off"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.name}
@@ -217,6 +245,7 @@ const AddDealPage = () => {
                 size="small"
                 id="retailPrice"
                 name="retailPrice"
+                autoComplete="off"
                 type="number"
                 onChange={(e: any) => {
                   formik.handleChange(e);
@@ -248,6 +277,7 @@ const AddDealPage = () => {
                 size="small"
                 id="discountedPrice"
                 name="discountedPrice"
+                autoComplete="off"
                 type="number"
                 onChange={(e: any) => {
                   formik.handleChange(e);
@@ -305,6 +335,7 @@ const AddDealPage = () => {
                 size="small"
                 type="date"
                 id="dealExpiry"
+                autoComplete="off"
                 name="dealExpiry"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -329,6 +360,7 @@ const AddDealPage = () => {
                 required
                 size="small"
                 id="location"
+                autoComplete="off"
                 name="location"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -339,6 +371,13 @@ const AddDealPage = () => {
               />
               {formik.touched.location && formik.errors.location ? (
                 <div>{formik.errors.location}</div>
+              ) : null}
+              {locationStatus === "OK" ? (
+                <Typography variant="body2" sx={{ p: 0.7 }}>
+                  {JSON.stringify(
+                    locationDetail.results[0].formatted_address
+                  ).replace(/['"]+/g, "")}
+                </Typography>
               ) : null}
             </Grid>
             <Grid item xs={12} sm={12} md={4}>

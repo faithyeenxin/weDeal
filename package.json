@@ -2,7 +2,7 @@
   "name": "04_wedeal_final",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "dependencies": {
     "turbo-darwin-arm64": "^1.5.5"
   },

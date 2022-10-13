@@ -157,6 +157,9 @@ router.post("/", async (req, res) => {
     retailPrice,
     discountedPrice,
     location,
+    locationAddress,
+    locationLat,
+    locationLong,
     dealExpiry,
     categoryId,
     uploadedImages,
@@ -169,6 +172,9 @@ router.post("/", async (req, res) => {
       retailPrice: retailPrice,
       discountedPrice: discountedPrice,
       location: location,
+      locationAddress: locationAddress,
+      locationLat: locationLat,
+      locationLong: locationLong,
       dealExpiry: dealExpiry,
       categoryId: categoryId,
     },
@@ -191,8 +197,17 @@ router.post("/", async (req, res) => {
 
 //* Update
 router.patch("/:id", async (req, res) => {
-  const { id, name, retailPrice, discountedPrice, location, dealExpiry } =
-    req.body;
+  const {
+    id,
+    name,
+    retailPrice,
+    discountedPrice,
+    location,
+    dealExpiry,
+    locationAddress,
+    locationLat,
+    locationLong,
+  } = req.body;
 
   const deal = await prisma.deal.update({
     where: {
@@ -203,6 +218,9 @@ router.patch("/:id", async (req, res) => {
       retailPrice: retailPrice,
       discountedPrice: discountedPrice,
       location: location,
+      locationAddress: locationAddress,
+      locationLat: locationLat,
+      locationLong: locationLong,
       dealExpiry: dealExpiry,
       dealPostedDate: new Date(),
     },

@@ -82,7 +82,7 @@ const UserPage = () => {
                 <TextField
                   disabled
                   size="small"
-                  value={user.name}
+                  value={user.username}
                   sx={{
                     width: "100%",
                   }}

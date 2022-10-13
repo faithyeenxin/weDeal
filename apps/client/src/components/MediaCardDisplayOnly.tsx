@@ -197,7 +197,7 @@ const MediaCardDisplayOnly = ({ item }: MediaCardDisplayOnlyProps) => {
               pr: 1,
             }}
           >
-            <IconButton href={`/${id}/deal/${item.id}`}>
+            <IconButton href={`/deal/${item.id}`}>
               <MoreHorizIcon />
             </IconButton>
           </Grid>

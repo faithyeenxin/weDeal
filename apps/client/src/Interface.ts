@@ -5,6 +5,9 @@ export interface IDeal {
   retailPrice: number;
   discountedPrice: number;
   location: string;
+  locationAddress?: string;
+  locationLat?: number;
+  locationLong?: number;
   dealLocation: string;
   dealPostedDate: Date;
   dealExpiry: Date;

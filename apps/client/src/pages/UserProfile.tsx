@@ -15,8 +15,12 @@ import MediaCard from "../features/mediaCard/MediaCard";
 import { Box } from "@mui/system";
 import { IDeal } from "../Interface";
 import MediaCardEdittable from "../components/MediaCardEdittabe";
+import parseJwt from "../UIUX/parseJwt";
 const UserProfile = () => {
-  const { id } = useParams();
+  const token: any = sessionStorage.getItem("token");
+  const payload = parseJwt(token);
+  const id = payload.id;
+
   const [upvotes, setUpvotes] = useState();
   const [user, setUser] = useState<IUser>({
     id: "",
@@ -91,7 +95,7 @@ const UserProfile = () => {
           >
             <Grid container rowSpacing={1} sx={{ m: 3 }}>
               <Grid item xs={12}>
-                <Typography variant="body2">Username</Typography>
+                <Typography variant="body2">Name</Typography>
                 <TextField
                   disabled
                   size="small"

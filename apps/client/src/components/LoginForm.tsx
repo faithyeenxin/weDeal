@@ -48,7 +48,7 @@ const LoginForm: FC = () => {
           sessionStorage.setItem("token", res.data.token);
           const payload = parseJwt(res.data.token);
           console.log(payload);
-          navigate(`/${payload.id}/home`);
+          navigate(`/home`);
         })
         .catch((error) => setError(error.response.data.error));
     },

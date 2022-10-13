@@ -29,6 +29,9 @@ model Deal {
   retailPrice     Float
   discountedPrice Float
   location        String
+  locationAddress String?
+  locationLat     Float?
+  locationLong    Float?
   dealerLocation  String?
   dealPostedDate  DateTime     @default(now())
   dealExpiry      DateTime
