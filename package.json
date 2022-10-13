@@ -2,7 +2,6 @@
   "name": "04_wedeal_final",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
   "dependencies": {
     "turbo-darwin-arm64": "^1.5.5"
   },
@@ -14,7 +13,8 @@
     "apps/*"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC"
