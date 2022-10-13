@@ -338,7 +338,8 @@ const DealPage = () => {
             <Grid container rowSpacing={1}>
               <Grid item xs={12}>
                 <Typography variant="h5">
-                  Deal Shared By: <a href={`/user/${user.id}`}>@{user.name}</a>
+                  Deal Shared By:{" "}
+                  <a href={`/user/${user.id}`}>@{user.username}</a>
                 </Typography>
               </Grid>
               <Grid item xs={12}>

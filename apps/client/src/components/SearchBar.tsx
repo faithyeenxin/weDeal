@@ -4,10 +4,9 @@ import CategoryField from "./CategoryField";
 import { useSearchAllDealsQuery } from "../features/api/apiSlice";
 import { useSearchParams } from "react-router-dom";
 const SearchBar = () => {
-  const [nameSearch, setNameSearch] = useState("");
-
-  const [location, setLocation] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
+  const [nameSearch, setNameSearch] = useState("");
+  const [location, setLocation] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const {
     data: searchedDeals, //renaming the data to "deals"
