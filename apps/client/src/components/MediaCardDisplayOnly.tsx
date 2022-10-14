@@ -198,7 +198,11 @@ const MediaCardDisplayOnly = ({ item }: MediaCardDisplayOnlyProps) => {
               pr: 1,
             }}
           >
-            <IconButton href={`/deal/${item.id}`}>
+            <IconButton
+              onClick={() => {
+                navigate(`/deal/${item.id}`);
+              }}
+            >
               <MoreHorizIcon />
             </IconButton>
           </Grid>

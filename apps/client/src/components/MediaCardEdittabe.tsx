@@ -213,7 +213,11 @@ const MediaCardEdittable = ({ item }: MediaCardEdittableProps) => {
               pr: 1,
             }}
           >
-            <IconButton href={`/deal-edit/${item.id}`}>
+            <IconButton
+              onClick={() => {
+                navigate(`/deal-edit/${item.id}`);
+              }}
+            >
               <EditIcon />
             </IconButton>
           </Grid>
