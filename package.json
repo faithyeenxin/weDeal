@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "devDependencies": {
+    "@types/node": "^18.8.5",
     "turbo": "^1.5.5"
   },
   "workspaces": [
