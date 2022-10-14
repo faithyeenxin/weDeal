@@ -191,8 +191,9 @@ const DealPage = () => {
               md={6}
               sx={{
                 p: 3,
-                justifyContent: "left",
-                alignItems: "left",
+                // display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
               {" "}
