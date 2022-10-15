@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT ?? 3000;
 const cloudinary = require("cloudinary");
 const multer = require("multer");
-import * as path from "path";
+const path = require("path");
 
 //////////////////////////////////////////////////////
 //// * Controllers
