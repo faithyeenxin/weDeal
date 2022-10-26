@@ -1,3 +1,5 @@
+Feel free to check out my slideshow here: https://docs.google.com/presentation/d/1x-Y05ApK71mBmouzAFXfAy1lQdzw5arcRckHGOH-OGY/edit?usp=sharing
+
 ![](https://github.com/faithyeenxin/weDeal/blob/main/slides/weDeal.jpg)
 ![](<https://github.com/faithyeenxin/weDeal/blob/main/slides/weDeal%20(1).jpg>)
 ![](<https://github.com/faithyeenxin/weDeal/blob/main/slides/weDeal%20(2).jpg>)
