@@ -42,7 +42,7 @@ const NavBar = () => {
               justifyContent: "center",
               alignItems: "center",
             }}
-            // spacing={2}
+          
           >
             <Grid
               item
@@ -53,6 +53,7 @@ const NavBar = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                mb:1
               }}
             >
               <LocalMallIcon
@@ -98,6 +99,7 @@ const NavBar = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    mb: 1
                   }}
                 >
                   <Button sx={projectButtonSx} onClick={registerHandler}>
@@ -111,6 +113,7 @@ const NavBar = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    mb: 1
                   }}
                 >
                   <Button sx={projectButtonSx} onClick={loginHandler}>

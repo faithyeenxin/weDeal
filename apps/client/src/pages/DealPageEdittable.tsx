@@ -103,24 +103,23 @@ const DealPageEdittable = () => {
         .test(
           "location-exist",
           "Location does not exist",
-          (location: any): boolean => {
-            axios
-              .get(
+           (location: any): boolean =>  {
+            return axios.get(
                 `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDBh_veIl8kLIgp2gCyglYDvnl-d0EK9CU&address=${location}`
               )
               .then((res) => {
                 setLocationStatus(res.data.status);
                 setLocationDetails(res.data);
                 console.log(res.data);
+                return res.data.status === "OK"
               })
               .catch((err) => console.log(err));
-            return locationStatus === "OK" ? true : false;
           }
         ),
     }),
 
     onSubmit: (values: any) => {
-      setLocationStatus("OK");
+      console.log("edit button clicked")
       const body = {
         id: dealid,
         name: values.name,

@@ -106,7 +106,7 @@ const MediaCard = ({ item }: MediaCardProps) => {
     <Card
       sx={{
         width: 260,
-        height: 420,
+        height: 430,
       }}
     >
       <Typography sx={{ textAlign: "right", mr: 1 }}>
@@ -118,14 +118,14 @@ const MediaCard = ({ item }: MediaCardProps) => {
         image={item?.DealImages[0]?.image}
         sx={{ mt: "5%", mb: "5%" }}
       />
-      <CardContent sx={{ height: "127px" }}>
+      <CardContent sx={{ height: "130px" }}>
         <Typography
           gutterBottom
           variant="h6"
           sx={{ fontFamily: "Arial", pb: 0, color: "#fbb002" }}
           component="div"
         >
-          {item.name.slice(0, 55)}...
+          {item.name.slice(0, 40)}...
         </Typography>
         <Grid container spacing={1} sx={{ mb: 1 }}>
           <Grid item>

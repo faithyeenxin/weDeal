@@ -2,20 +2,23 @@ import { Box, Grid, Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
 import shoppingMan from "../../public/shopping_man.mp4";
+import Image from "../../public/mobile_bg.jpg";
+
 const LoginPage = () => {
   return (
     <Box>
+     
       <Grid container>
         <Grid
           item
-          sm={12}
-          md={6}
+          md={12}
+          lg={6}
           sx={{
             // backgroundImage: `url(https://images.pexels.com/photos/462235/pexels-photo-462235.jpeg?auto=compress&cs=tinysrgb&w=1600)`,
             backgroundSize: "cover",
             backgroundPosition: "center center",
             height: "100vh",
-            display: { xs: "none", sm: "none", md: "block" },
+            display: { xs: "none", sm: "none", md:"none",lg: "block" },
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -31,8 +34,10 @@ const LoginPage = () => {
         </Grid>
         <Grid
           item
+          xs={12}
           sm={12}
-          md={6}
+          md={12}
+          lg={6}
           sx={{
             display: "flex",
             alignItems: "center",
@@ -66,6 +71,7 @@ const LoginPage = () => {
           </Box>
         </Grid>
       </Grid>
+
     </Box>
   );
 };

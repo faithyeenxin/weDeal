@@ -89,6 +89,7 @@ const DealPage = () => {
         sx={{
           mt: "3rem",
           mb: "3rem",
+         
           pb: "0.5rem",
           backgroundColor: "#efe0d3",
           borderRadius: "3%",
@@ -121,7 +122,7 @@ const DealPage = () => {
             <Grid
               item
               sm={12}
-              md={6}
+              lg={6}
               sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -147,7 +148,7 @@ const DealPage = () => {
                   <img
                     src={bigImg}
                     style={{
-                      width: "50vh",
+                      width: "70%",
                       marginBottom: "1rem",
                       borderRadius: 15,
                     }}
@@ -187,8 +188,8 @@ const DealPage = () => {
             </Grid>
             <Grid
               item
-              sm={12}
-              md={6}
+              xs={12}
+              lg={6}
               sx={{
                 p: 3,
                 // display: "flex",
@@ -197,9 +198,9 @@ const DealPage = () => {
               }}
             >
               {" "}
-              <Grid container spacing={2} sx={{ pt: 5 }}>
-                <Grid item xs={12}>
-                  <Grid container spacing={1}>
+              <Grid container spacing={2} sx={{ pt: 5 }} >
+                <Grid item xs={12} >
+                  <Grid container spacing={1} >
                     <Grid item md={6}>
                       <Typography variant="body2" sx={{ mb: "0.5rem" }}>
                         Discounted Price
