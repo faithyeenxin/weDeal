@@ -103,7 +103,7 @@ const DealPageEdittable = () => {
         .test(
           "location-exist",
           "Location does not exist",
-           (location: any): Promise<boolean | void> =>  {
+           (location: any): any =>  {
             return axios.get(
                 `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDBh_veIl8kLIgp2gCyglYDvnl-d0EK9CU&address=${location}`
               )
