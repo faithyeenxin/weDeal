@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IDeal } from "../../Interface";
 
-export const apiSlice = createApi({
+export const dealSlice = createApi({
   reducerPath: `dealApi`,
   baseQuery: fetchBaseQuery({ baseUrl: `/api` }),
   /* 1) create a tag for the cache so that we invalidate it within our mutations 
@@ -26,29 +26,10 @@ export const apiSlice = createApi({
       },
       providesTags: [`Deals`],
     }),
-    addUpvote: builder.mutation({
-      query: (id) => ({
-        url: `/deal/upvote/${id}`,
-        method: `PATCH`,
-      }),
-      invalidatesTags: [`Deals`],
-    }),
-    addDownvote: builder.mutation({
-      query: (id) => ({
-        url: `/deal/downvote/${id}`,
-        method: `PATCH`,
-      }),
-      invalidatesTags: [`Deals`],
-    }),
   }),
 });
 
-export const {
-  useGetAllDealsQuery,
-  useSearchAllDealsQuery,
-  useAddUpvoteMutation,
-  useAddDownvoteMutation,
-} = apiSlice;
+export const { useGetAllDealsQuery, useSearchAllDealsQuery } = dealSlice;
 
 /* 
 Notes 

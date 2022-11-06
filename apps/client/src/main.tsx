@@ -4,13 +4,12 @@ import App from "./App";
 import { ThemeProvider } from "@emotion/react";
 import theme from "./theme";
 import { CssBaseline } from "@mui/material/";
-
 import { ApiProvider } from "@reduxjs/toolkit/query/react";
-import { apiSlice } from "./features/api/apiSlice";
+import { dealSlice } from "./features/api/dealSlice";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <ApiProvider api={apiSlice}>
+    <ApiProvider api={dealSlice}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <App />

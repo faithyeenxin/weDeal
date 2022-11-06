@@ -5,54 +5,26 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 //* Seed Route
-
 router.get("/seed", async (req, res) => {
   await prisma.deal.deleteMany();
+
   const seedDeal = await prisma.deal.createMany({
     data: [
       {
-        userId: "bff81b10-0223-4a9f-9954-8f41d6b7a475",
-        name: "MOIST DIANE Perfect Beauty Extra Damage Repair Shampoo",
+        userId: "73b029af-2571-49ca-aa10-d8a907f72784",
+        name: "Curel Moisturizer for Sensitive Skin",
         retailPrice: 16.9,
         discountedPrice: 10.9,
         location: "postal code/ long+ lat here",
-        dealLocation: "postal code/ long+ lat here",
+        locationAddress: "postal code/ long+ lat here",
         dealPostedDate: new Date(2022, 10, 01),
-        dealExpiry: new Date(2022, 11, 20),
-        categoryId: "6ea7ed58-cdc3-45be-97db-53e9a2c43a1f",
-        totalUpvotes: 10,
-        totalDownvotes: 0,
-      },
-      {
-        userId: "bff81b10-0223-4a9f-9954-8f41d6b7a475",
-        name: "SILKYGIRL Shine-Free Loose Powder",
-        retailPrice: 7.74,
-        discountedPrice: 6,
-        location: "postal code/ long+ lat here",
-        dealLocation: "postal code/ long+ lat here",
-        dealPostedDate: new Date(2022, 9, 01),
-        dealExpiry: new Date(2022, 11, 25),
-        categoryId: "6ea7ed58-cdc3-45be-97db-53e9a2c43a1f",
-        totalUpvotes: 25,
-        totalDownvotes: 3,
-      },
-      {
-        userId: "bff81b10-0223-4a9f-9954-8f41d6b7a475",
-        name: "Garnier Serum Mask - Hydra Bomb Green Tea",
-        retailPrice: 2.9,
-        discountedPrice: 1.9,
-        location: "postal code/ long+ lat here",
-        dealLocation: "postal code/ long+ lat here",
-        dealPostedDate: new Date(2022, 8, 05),
-        dealExpiry: new Date(2022, 12, 20),
-        categoryId: "6ea7ed58-cdc3-45be-97db-53e9a2c43a1f",
-        totalUpvotes: 72,
-        totalDownvotes: 21,
+        dealExpiry: new Date(2023, 11, 20),
+        categoryId: "50028acb-f97f-49a5-8a78-25df1ae53ad0",
       },
     ],
   });
-
-  res.status(200).send(seedDeal);
+  const allDeals = await prisma.deal.findMany();
+  res.status(200).send(allDeals);
 });
 
 //* Show All Deals
@@ -65,6 +37,7 @@ router.get("/", async (req, res) => {
     },
     include: {
       DealImages: true,
+      Votes: true,
     },
     orderBy: { dealPostedDate: "desc" },
   });
@@ -90,6 +63,7 @@ router.get("/search", async (req, res) => {
     },
     include: {
       DealImages: true,
+      Votes: true,
       category: true,
     },
     orderBy: { dealPostedDate: "desc" },
@@ -107,6 +81,7 @@ router.get("/:id", async (req, res) => {
     },
     include: {
       DealImages: true,
+      Votes: true,
     },
   });
   res.status(200).send(deal);
@@ -228,34 +203,34 @@ router.patch("/:id", async (req, res) => {
   res.status(200).send(deal);
 });
 
-//* Update Upvote
-router.patch("/upvote/:id", async (req, res) => {
-  const { id } = req.params;
+// //* Update Upvote
+// router.patch("/upvote/:id", async (req, res) => {
+//   const { id } = req.params;
 
-  const deal = await prisma.deal.update({
-    where: {
-      id: id,
-    },
-    data: {
-      totalUpvotes: { increment: 1 },
-    },
-  });
-  res.status(200).send(deal);
-});
+//   const deal = await prisma.deal.update({
+//     where: {
+//       id: id,
+//     },
+//     data: {
+//       totalUpvotes: { increment: 1 },
+//     },
+//   });
+//   res.status(200).send(deal);
+// });
 
-//* Update Downvote
-router.patch("/downvote/:id", async (req, res) => {
-  const { id } = req.params;
-  const deal = await prisma.deal.update({
-    where: {
-      id: id,
-    },
-    data: {
-      totalDownvotes: { increment: 1 },
-    },
-  });
-  res.status(200).send(deal);
-});
+// //* Update Downvote
+// router.patch("/downvote/:id", async (req, res) => {
+//   const { id } = req.params;
+//   const deal = await prisma.deal.update({
+//     where: {
+//       id: id,
+//     },
+//     data: {
+//       totalDownvotes: { increment: 1 },
+//     },
+//   });
+//   res.status(200).send(deal);
+// });
 
 //* Delete
 

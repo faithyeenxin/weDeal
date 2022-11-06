@@ -60,8 +60,8 @@ router.get("/seed", async (req, res) => {
       },
     ],
   });
-
-  res.status(200).send(seedCategory);
+  const allCategory = await prisma.category.findMany();
+  res.status(200).send(allCategory);
 });
 
 //* Show All Categories

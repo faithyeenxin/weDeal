@@ -12,7 +12,7 @@ const UserController = require("./controller/UserController");
 const DealController = require("./controller/DealController");
 const DealImagesController = require("./controller/DealImagesController");
 const CategoryController = require("./controller/CategoryController");
-
+const VoteController = require("./controller/VoteController");
 //////////////////////////////////////////////////////
 //// * Middleware
 //////////////////////////////////////////////////////
@@ -24,6 +24,7 @@ app.use("/api/user", UserController);
 app.use("/api/deal", DealController);
 app.use("/api/dealimages", DealImagesController);
 app.use("/api/category", CategoryController);
+app.use("/api/votes", VoteController);
 
 //////////////////////////////////////////////////////
 //// * Cloudinary

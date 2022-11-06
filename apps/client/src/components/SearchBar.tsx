@@ -1,7 +1,7 @@
 import { Button, Container, Grid, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import CategoryField from "./CategoryField";
-import { useSearchAllDealsQuery } from "../features/api/apiSlice";
+import { useSearchAllDealsQuery } from "../features/api/dealSlice";
 import { useSearchParams } from "react-router-dom";
 const SearchBar = () => {
   const [searchParams, setSearchParams] = useSearchParams();

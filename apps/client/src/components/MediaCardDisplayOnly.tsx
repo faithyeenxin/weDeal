@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -18,9 +18,14 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import TextsmsIcon from "@mui/icons-material/Textsms";
 import EditIcon from "@mui/icons-material/Edit";
-import { IDeal } from "../Interface";
+import { IDeal, IVotes } from "../Interface";
 import intervalToDuration from "date-fns/intervalToDuration";
 import { useNavigate, useParams } from "react-router-dom";
+
+import { useSearchAllVotesByDealIdQuery } from "../features/api/votesSlice";
+import { InsertEmoticon } from "@mui/icons-material";
+import axios from "axios";
+
 const positionSx = {
   display: "flex",
   justifyContent: "center",
@@ -41,7 +46,6 @@ const uploadTimeFormat = {
 };
 
 const MediaCardDisplayOnly = ({ item }: MediaCardDisplayOnlyProps) => {
-  console.log("media card displaying");
   const navigate = useNavigate();
   const { id } = useParams();
   const today = new Date();
@@ -49,6 +53,7 @@ const MediaCardDisplayOnly = ({ item }: MediaCardDisplayOnlyProps) => {
     start: new Date(item.dealPostedDate),
     end: today,
   });
+  const [totalVotes, setTotalVotes] = useState(0);
 
   const years = uploadTimeObject.years;
   const months = uploadTimeObject.months;
@@ -97,6 +102,17 @@ const MediaCardDisplayOnly = ({ item }: MediaCardDisplayOnlyProps) => {
     }
   }
 
+  useEffect(() => {
+    axios
+      .get(`/api/votes/bydeal/${item.id}`)
+      .then((res) => {
+        let allVotes = 0;
+        res.data.map((vote: IVotes) => (allVotes += vote.voteStatus));
+        setTotalVotes(allVotes);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <Card
       sx={{
@@ -107,7 +123,7 @@ const MediaCardDisplayOnly = ({ item }: MediaCardDisplayOnlyProps) => {
       <Grid container sx={{ mt: 2, mb: 2 }}>
         <Grid item xs={6} sx={{ pl: 1 }}>
           <Grid container sx={{ gap: 1 }}>
-            {item.totalUpvotes - item.totalDownvotes > 0 ? (
+            {totalVotes > 0 ? (
               <SentimentSatisfiedAltIcon sx={{ color: "#a1c060" }} />
             ) : (
               <SentimentVeryDissatisfiedIcon sx={{ color: "#e9622a" }} />
@@ -119,13 +135,10 @@ const MediaCardDisplayOnly = ({ item }: MediaCardDisplayOnlyProps) => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                color:
-                  item.totalUpvotes - item.totalDownvotes > 0
-                    ? "#a1c060"
-                    : "#e9622a",
+                color: totalVotes > 0 ? "#a1c060" : "#e9622a",
               }}
             >
-              {item.totalUpvotes - item.totalDownvotes}
+              {totalVotes}
             </Typography>
           </Grid>
         </Grid>

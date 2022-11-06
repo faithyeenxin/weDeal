@@ -19,6 +19,7 @@ model User {
   email      String   @unique
   dateJoined DateTime @default(now())
   Deals      Deal[]
+  Votes      Votes[]
 }
 
 model Deal {
@@ -37,9 +38,8 @@ model Deal {
   dealExpiry      DateTime
   category        Category     @relation(fields: [categoryId], references: [id])
   categoryId      String
-  totalUpvotes    Int          @default(0)
-  totalDownvotes  Int          @default(0)
   DealImages      DealImages[]
+  Votes           Votes[]
 }
 
 model Category {
@@ -54,3 +54,16 @@ model DealImages {
   dealId String
   image  String
 }
+
+model Votes {
+  deal       Deal   @relation(fields: [dealId], references: [id])
+  user       User   @relation(fields: [userId], references: [id])
+  dealId     String
+  userId     String
+  voteStatus Int    @default(0)
+
+  @@id([dealId, userId])
+}
+
+// notes on how to retrieve data using composite id
+// https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference

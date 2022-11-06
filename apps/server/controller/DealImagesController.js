@@ -11,24 +11,24 @@ router.get("/seed", async (req, res) => {
   const seedDealImages = await prisma.dealImages.createMany({
     data: [
       {
-        dealId: "1cc092db-2c43-40dd-9ec5-ce3d26855f78",
+        dealId: "1edf02f8-cd5d-4d44-b539-37b261af55ca",
         image:
-          "https://api.watsons.com.sg/medias/zoom-front-56858.jpg?context=bWFzdGVyfGZyb250L3pvb218NzMyMjB8aW1hZ2UvanBlZ3xmcm9udC96b29tL2g2ZC9oM2UvOTE4NjY2ODkzNzI0Ni5qcGd8MTE2ZmU4MjYyY2FlMWEzZTE4NzNiNDllOGNkODIyZDY3YzZkZTY3NzNjYzU5NzVjODhiM2I2ODQ0YTcwMDI2Yg",
+          "https://res.cloudinary.com/dj6tlm5xx/image/upload/v1665412938/projects/gl5odsztrpwgxqwghrwg.jpg",
       },
       {
-        dealId: "1cc092db-2c43-40dd-9ec5-ce3d26855f78",
+        dealId: "1edf02f8-cd5d-4d44-b539-37b261af55ca",
         image:
-          "https://api.watsons.com.sg/medias/zoom-front-56862.jpg?context=bWFzdGVyfGZyb250L3pvb218NzI5NjJ8aW1hZ2UvanBlZ3xmcm9udC96b29tL2g2Yi9oMDgvOTE4NjY5NzUxMDk0Mi5qcGd8MzYxY2E5NmI2ZjNlOGNlYjVlNzEwYmY4NGYyNTJiNmEzZWUzNTY5ZjQ0ZjU0NTM3YTY1OTUwNzAyNDhhYjZhMA",
+          "https://res.cloudinary.com/dj6tlm5xx/image/upload/v1665413009/projects/curel1_mcffct.jpg",
       },
       {
-        dealId: "1cc092db-2c43-40dd-9ec5-ce3d26855f78",
+        dealId: "1edf02f8-cd5d-4d44-b539-37b261af55ca",
         image:
-          "https://media.nedigital.sg/fairprice/fpol/media/images/product/XL/13136324_XL1_20220822.jpg",
+          "https://res.cloudinary.com/dj6tlm5xx/image/upload/v1665412938/projects/jnpnhjxddva3natnoryd.jpg",
       },
     ],
   });
-
-  res.status(200).send(seedDealImages);
+  const allDealImages = await prisma.dealImages.findMany();
+  res.status(200).send(allDealImages);
 });
 
 //* Show All Deal Images

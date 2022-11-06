@@ -10,7 +10,7 @@ import { Container } from "@mui/system";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { IDeal, IUser } from "../Interface";
+import { IDeal, IUser, IVotes } from "../Interface";
 import format from "date-fns/format";
 
 const DealPage = () => {
@@ -37,8 +37,7 @@ const DealPage = () => {
     dealPostedDate: new Date(),
     dealExpiry: new Date(),
     categoryId: "",
-    totalUpvotes: 0,
-    totalDownvotes: 0,
+    Votes: [],
     DealImages: [],
   });
 
@@ -47,18 +46,18 @@ const DealPage = () => {
       .get(`/api/deal/${dealid}`)
       .then((res) => {
         console.log(res.data);
+        setUpvotes(
+          res.data.Votes.reduce((acc: number, obj: IVotes) => {
+            return acc + obj.voteStatus;
+          }, 0)
+        );
         setBigImg(res.data.DealImages[0].image);
         setDeal(res.data);
         return axios.get(`/api/user/${res.data.userId}`);
       })
       .then((res) => {
+        console.log(res.data.Deals);
         setUser(res.data);
-        setUpvotes(
-          res.data.Deals.reduce((acc: number, obj: IDeal) => {
-            return acc + obj.totalUpvotes;
-          }, 0)
-        );
-        console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -66,22 +65,7 @@ const DealPage = () => {
   const handleEnlarge = (e: any) => {
     setBigImg(e.target.src);
   };
-  /* 
-{
-    userId: "bff81b10-0223-4a9f-9954-8f41d6b7a475",
-    name: "MOIST DIANE Perfect Beauty Extra Damage Repair Shampoo",
-    retailPrice: 16.9,
-    discountedPrice: 10.9,
-    location: "postal code/ long+ lat here",
-    dealLocation: "postal code/ long+ lat here",
-    dealPostedDate: new Date(2022, 10, 01),
-    dealExpiry: new Date(2022, 11, 20),
-    categoryId: "6ea7ed58-cdc3-45be-97db-53e9a2c43a1f",
-    totalUpvotes: 10,
-    totalDownvotes: 0,
-    DealImages: [""]
-    }
-  */
+
   return (
     <>
       <Container
@@ -89,7 +73,7 @@ const DealPage = () => {
         sx={{
           mt: "3rem",
           mb: "3rem",
-         
+
           pb: "0.5rem",
           backgroundColor: "#efe0d3",
           borderRadius: "3%",
@@ -198,9 +182,9 @@ const DealPage = () => {
               }}
             >
               {" "}
-              <Grid container spacing={2} sx={{ pt: 5 }} >
-                <Grid item xs={12} >
-                  <Grid container spacing={1} >
+              <Grid container spacing={2} sx={{ pt: 5 }}>
+                <Grid item xs={12}>
+                  <Grid container spacing={1}>
                     <Grid item md={6}>
                       <Typography variant="body2" sx={{ mb: "0.5rem" }}>
                         Discounted Price

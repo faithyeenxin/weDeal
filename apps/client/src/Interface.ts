@@ -1,3 +1,5 @@
+import { string } from "yup";
+
 export interface IDeal {
   id: string;
   userId: string;
@@ -12,9 +14,14 @@ export interface IDeal {
   dealPostedDate: Date;
   dealExpiry: Date;
   categoryId: string;
-  totalUpvotes: number;
-  totalDownvotes: number;
   DealImages: IDealImages[];
+  Votes: IVotes[];
+}
+
+export interface IVotes {
+  dealId: string;
+  userId: string;
+  voteStatus: number;
 }
 
 export interface IDealImages {

@@ -19,23 +19,17 @@ router.get("/seed", async (req, res) => {
         username: "admin123",
         password: bcrypt.hashSync("password123", 10),
         name: "Administrator",
-        image: "url",
+        image:
+          "https://res.cloudinary.com/dj6tlm5xx/image/upload/v1665411728/samples/people/new_user_fnx00w.jpg",
         email: "admin123@hotmail.com",
         dateJoined: new Date(2022, 10, 05),
-      },
-      {
-        username: "faith123",
-        password: bcrypt.hashSync("faith123", 10),
-        name: "Faith",
-        image: "url",
-        email: "faith123@hotmail.com",
-        dateJoined: new Date(2022, 10, 01),
       },
       {
         username: "ben123",
         password: bcrypt.hashSync("ben123", 10),
         name: "Benjamine",
-        image: "url",
+        image:
+          "https://res.cloudinary.com/dj6tlm5xx/image/upload/v1665411728/samples/people/new_user_fnx00w.jpg",
         email: "benjamine123@hotmail.com",
         dateJoined: new Date(2022, 10, 02),
       },
@@ -43,7 +37,8 @@ router.get("/seed", async (req, res) => {
         username: "chelsea123",
         password: bcrypt.hashSync("chelsea123", 10),
         name: "Chelsea",
-        image: "url",
+        image:
+          "https://res.cloudinary.com/dj6tlm5xx/image/upload/v1665411728/samples/people/new_user_fnx00w.jpg",
         email: "chealsea123@hotmail.com",
         dateJoined: new Date(2022, 10, 03),
       },
@@ -51,13 +46,24 @@ router.get("/seed", async (req, res) => {
         username: "dominique123",
         password: bcrypt.hashSync("dom123", 10),
         name: "Dominique",
-        image: "url",
+        image:
+          "https://res.cloudinary.com/dj6tlm5xx/image/upload/v1665411728/samples/people/new_user_fnx00w.jpg",
         email: "dominique123@hotmail.com",
         dateJoined: new Date(2022, 10, 04),
       },
+      {
+        username: "byfaithx",
+        password: bcrypt.hashSync("Faithyeenx5!", 10),
+        name: "Faith",
+        image:
+          "https://res.cloudinary.com/dj6tlm5xx/image/upload/v1665411728/samples/people/new_user_fnx00w.jpg",
+        email: "faith123@hotmail.com",
+        dateJoined: new Date(2022, 10, 01),
+      },
     ],
   });
-  res.status(200).send(seedUsers);
+  const allUsers = await prisma.user.findMany();
+  res.status(200).send(allUsers);
 });
 
 //* Show All Users
@@ -76,7 +82,7 @@ router.get("/:id", async (req, res) => {
     include: {
       Deals: {
         orderBy: { dealPostedDate: "desc" },
-        include: { DealImages: true },
+        include: { DealImages: true, Votes: true },
       },
     },
   });

@@ -1,10 +1,6 @@
-import {
-  useGetAllDealsQuery,
-  useAddDownvoteMutation,
-  useAddUpvoteMutation,
-} from "../features/api/apiSlice";
+// import { useSearchAllVotesByDealIdQuery } from "../features/api/votesSlice";
+import React, { useEffect, useState } from "react";
 
-import * as React from "react";
 import {
   Card,
   CardContent,
@@ -21,9 +17,12 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import TextsmsIcon from "@mui/icons-material/Textsms";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { IDeal } from "../Interface";
+import { IDeal, IVotes } from "../Interface";
 import intervalToDuration from "date-fns/intervalToDuration";
 import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { useAddUpvoteMutation } from "../features/api/votesSlice";
+import parseJwt from "../UIUX/parseJwt";
 const positionSx = {
   display: "flex",
   justifyContent: "center",
@@ -45,15 +44,19 @@ const uploadTimeFormat = {
 
 const MediaCard = ({ item }: MediaCardProps) => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const token: any = sessionStorage.getItem("token");
+  const payload = parseJwt(token);
+  const id = payload.id;
   const today = new Date();
   const uploadTimeObject = intervalToDuration({
     start: new Date(item.dealPostedDate),
     end: today,
   });
+  const [totalVotes, setTotalVotes] = useState(0);
+  const [voteChange, setVoteChange] = useState(false);
 
-  const [addUpvote] = useAddUpvoteMutation();
-  const [addDownvote] = useAddDownvoteMutation();
+  // const [addUpvote] = useAddUpvoteMutation();
+  // const [addDownvote] = useAddDownvoteMutation();
 
   const years = uploadTimeObject.years;
   const months = uploadTimeObject.months;
@@ -101,6 +104,37 @@ const MediaCard = ({ item }: MediaCardProps) => {
       uploadedTimeString = `${seconds} seconds ago`;
     }
   }
+
+  // if RTK Query fails, we then use this:
+  useEffect(() => {
+    axios
+      .get(`/api/votes/bydeal/${item.id}`)
+      .then((res) => {
+        console.log(res.data);
+        let allVotes = 0;
+        res.data.map((vote: IVotes) => (allVotes += vote.voteStatus));
+        setTotalVotes(allVotes);
+      })
+      .catch((err) => console.log(err));
+  }, [voteChange]);
+
+  const addUpvote = (dealId: string, userId: string) => {
+    axios
+      .post(`/api/votes/upvote/${userId}/${dealId}`)
+      .then((res) => setVoteChange(!voteChange))
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const addDownvote = (dealId: string, userId: string) => {
+    axios
+      .post(`/api/votes/downvote/${userId}/${dealId}`)
+      .then((res) => setVoteChange(!voteChange))
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <Card
@@ -168,17 +202,19 @@ const MediaCard = ({ item }: MediaCardProps) => {
           <Grid item xs={6}>
             <Grid container>
               <Grid item md={4} sx={positionSx}>
-                <IconButton onClick={() => addDownvote(item.id)}>
+                <IconButton onClick={() => addDownvote(item.id, item.userId)}>
+                  {/* <IconButton> */}
                   <ThumbDownOffAltIcon sx={{ color: "red" }} />
                 </IconButton>
               </Grid>
               <Grid item md={4} sx={positionSx}>
                 <Typography variant="h5" sx={{ fontFamily: "Arial" }}>
-                  {item.totalUpvotes - item.totalDownvotes}
+                  {totalVotes}
                 </Typography>
               </Grid>
               <Grid item md={4} sx={positionSx}>
-                <IconButton onClick={() => addUpvote(item.id)}>
+                <IconButton onClick={() => addUpvote(item.id, item.userId)}>
+                  {/* <IconButton> */}
                   <ThumbUpOffAltIcon sx={{ color: "green" }} />
                 </IconButton>
               </Grid>

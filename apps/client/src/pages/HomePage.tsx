@@ -1,5 +1,5 @@
-import { useGetAllDealsQuery } from "../features/api/apiSlice";
-import { useSearchAllDealsQuery } from "../features/api/apiSlice";
+import { useGetAllDealsQuery } from "../features/api/dealSlice";
+import { useSearchAllDealsQuery } from "../features/api/dealSlice";
 import { useSearchParams } from "react-router-dom";
 
 import { useState, useEffect } from "react";
@@ -25,7 +25,7 @@ const Home = () => {
       category: searchParams.get(`category`) ?? "",
       location: searchParams.get(`location`) ?? "",
     },
-    { pollingInterval: 2000 }
+    { pollingInterval: 5000 }
   );
 
   // to add back in polling once done with testing
@@ -45,7 +45,7 @@ const Home = () => {
         }}
       >
         {deals.map((item) => {
-          console.log(item);
+          // console.log(item);
           return (
             <Grid
               item

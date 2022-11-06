@@ -1,4 +1,4 @@
-import { useGetAllDealsQuery } from "../features/api/apiSlice";
+import { useGetAllDealsQuery } from "../features/api/dealSlice";
 
 import { Card, Grid, Paper, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
@@ -11,13 +11,12 @@ import { json } from "react-router-dom";
 import MediaCardDisplayOnly from "../components/MediaCardDisplayOnly";
 
 const LandingPage = () => {
-  console.log("landing page loaded");
   const {
     data: deals, //renaming the data to "deals"
     isLoading,
     isSuccess,
     isError,
-  } = useGetAllDealsQuery(null, { pollingInterval: 3000 });
+  } = useGetAllDealsQuery(null, { pollingInterval: 5000 });
 
   let content;
 
