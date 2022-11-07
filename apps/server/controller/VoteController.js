@@ -90,8 +90,8 @@ router.post("/upvote/:userId/:dealId", async (req, res) => {
   if (!vote) {
     const deal = await prisma.votes.create({
       data: {
-        dealId: dealId,
         userId: userId,
+        dealId: dealId,
         voteStatus: 1,
       },
     });
@@ -106,8 +106,8 @@ router.post("/upvote/:userId/:dealId", async (req, res) => {
         },
       },
       data: {
-        dealId: dealId,
         userId: userId,
+        dealId: dealId,
         voteStatus: 1,
       },
     });
@@ -122,8 +122,8 @@ router.post("/upvote/:userId/:dealId", async (req, res) => {
         },
       },
       data: {
-        dealId: dealId,
         userId: userId,
+        dealId: dealId,
         voteStatus: 0,
       },
     });
@@ -151,8 +151,8 @@ router.post("/downvote/:userId/:dealId", async (req, res) => {
   if (!vote) {
     const deal = await prisma.votes.create({
       data: {
-        dealId: dealId,
         userId: userId,
+        dealId: dealId,
         voteStatus: -1,
       },
     });
@@ -167,8 +167,8 @@ router.post("/downvote/:userId/:dealId", async (req, res) => {
         },
       },
       data: {
-        dealId: dealId,
         userId: userId,
+        dealId: dealId,
         voteStatus: -1,
       },
     });
@@ -183,8 +183,8 @@ router.post("/downvote/:userId/:dealId", async (req, res) => {
         },
       },
       data: {
-        dealId: dealId,
         userId: userId,
+        dealId: dealId,
         voteStatus: 0,
       },
     });

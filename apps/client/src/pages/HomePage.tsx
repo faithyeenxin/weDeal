@@ -25,13 +25,28 @@ const Home = () => {
       category: searchParams.get(`category`) ?? "",
       location: searchParams.get(`location`) ?? "",
     },
-    { pollingInterval: 5000 }
+    { pollingInterval: 1000 }
   );
+
+  // const {
+  //   data: deals, //renaming the data to "deals"
+  //   isLoading,
+  //   isSuccess,
+  //   isError,
+  // } = useSearchAllDealsQuery(
+  //   {
+  //     name: searchParams.get(`name`) ?? "",
+  //     category: searchParams.get(`category`) ?? "",
+  //     location: searchParams.get(`location`) ?? "",
+  //   },
+  //   { pollingInterval: 5000 }
+  // );
 
   // to add back in polling once done with testing
   // useGetAllDealsQuery(null, { pollingInterval: 5000 });
+  console.log(`deals array:`);
+  console.log(deals);
   let content;
-
   if (isLoading) {
     content = <p>Loading...</p>;
   } else if (isSuccess) {
@@ -45,7 +60,6 @@ const Home = () => {
         }}
       >
         {deals.map((item) => {
-          // console.log(item);
           return (
             <Grid
               item

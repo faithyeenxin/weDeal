@@ -43,4 +43,5 @@ export interface IUser {
   email: string;
   dateJoined: Date;
   Deals?: IDeal[];
+  Votes?: IVotes[];
 }

@@ -17,7 +17,7 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import TextsmsIcon from "@mui/icons-material/Textsms";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { IDeal, IVotes } from "../Interface";
+import { IDeal, IUser, IVotes } from "../Interface";
 import intervalToDuration from "date-fns/intervalToDuration";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -47,6 +47,7 @@ const MediaCard = ({ item }: MediaCardProps) => {
   const token: any = sessionStorage.getItem("token");
   const payload = parseJwt(token);
   const id = payload.id;
+
   const today = new Date();
   const uploadTimeObject = intervalToDuration({
     start: new Date(item.dealPostedDate),
@@ -54,9 +55,6 @@ const MediaCard = ({ item }: MediaCardProps) => {
   });
   const [totalVotes, setTotalVotes] = useState(0);
   const [voteChange, setVoteChange] = useState(false);
-
-  // const [addUpvote] = useAddUpvoteMutation();
-  // const [addDownvote] = useAddDownvoteMutation();
 
   const years = uploadTimeObject.years;
   const months = uploadTimeObject.months;
@@ -110,7 +108,6 @@ const MediaCard = ({ item }: MediaCardProps) => {
     axios
       .get(`/api/votes/bydeal/${item.id}`)
       .then((res) => {
-        console.log(res.data);
         let allVotes = 0;
         res.data.map((vote: IVotes) => (allVotes += vote.voteStatus));
         setTotalVotes(allVotes);
@@ -118,7 +115,7 @@ const MediaCard = ({ item }: MediaCardProps) => {
       .catch((err) => console.log(err));
   }, [voteChange]);
 
-  const addUpvote = (dealId: string, userId: string) => {
+  const addUpvote = (userId: string, dealId: string) => {
     axios
       .post(`/api/votes/upvote/${userId}/${dealId}`)
       .then((res) => setVoteChange(!voteChange))
@@ -127,7 +124,7 @@ const MediaCard = ({ item }: MediaCardProps) => {
       });
   };
 
-  const addDownvote = (dealId: string, userId: string) => {
+  const addDownvote = (userId: string, dealId: string) => {
     axios
       .post(`/api/votes/downvote/${userId}/${dealId}`)
       .then((res) => setVoteChange(!voteChange))
@@ -135,7 +132,7 @@ const MediaCard = ({ item }: MediaCardProps) => {
         console.log(err);
       });
   };
-
+  console.log(item.Votes);
   return (
     <Card
       sx={{
@@ -202,9 +199,20 @@ const MediaCard = ({ item }: MediaCardProps) => {
           <Grid item xs={6}>
             <Grid container>
               <Grid item md={4} sx={positionSx}>
-                <IconButton onClick={() => addDownvote(item.id, item.userId)}>
+                <IconButton onClick={() => addDownvote(id, item.id)}>
                   {/* <IconButton> */}
-                  <ThumbDownOffAltIcon sx={{ color: "red" }} />
+                  <ThumbDownOffAltIcon
+                    sx={
+                      item.Votes.some((item) => {
+                        console.log(`vote's userId: ${item.userId}`);
+                        console.log(`logged in user id: ${id}`);
+                        console.log(item.userId === id);
+                        return item.userId === id && item.voteStatus === -1;
+                      })
+                        ? { color: "red" }
+                        : { color: "gray" }
+                    }
+                  />
                 </IconButton>
               </Grid>
               <Grid item md={4} sx={positionSx}>
@@ -213,9 +221,17 @@ const MediaCard = ({ item }: MediaCardProps) => {
                 </Typography>
               </Grid>
               <Grid item md={4} sx={positionSx}>
-                <IconButton onClick={() => addUpvote(item.id, item.userId)}>
+                <IconButton onClick={() => addUpvote(id, item.id)}>
                   {/* <IconButton> */}
-                  <ThumbUpOffAltIcon sx={{ color: "green" }} />
+                  <ThumbUpOffAltIcon
+                    sx={
+                      item.Votes.some(
+                        (item) => item.userId === id && item.voteStatus === 1
+                      )
+                        ? { color: "green" }
+                        : { color: "gray" }
+                    }
+                  />
                 </IconButton>
               </Grid>
             </Grid>
