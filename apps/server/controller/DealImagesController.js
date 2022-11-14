@@ -11,17 +11,17 @@ router.get("/seed", async (req, res) => {
   const seedDealImages = await prisma.dealImages.createMany({
     data: [
       {
-        dealId: "1edf02f8-cd5d-4d44-b539-37b261af55ca",
+        dealId: "3ceb51c2-c97b-4354-88b6-1d9499eba809",
         image:
           "https://res.cloudinary.com/dj6tlm5xx/image/upload/v1665412938/projects/gl5odsztrpwgxqwghrwg.jpg",
       },
       {
-        dealId: "1edf02f8-cd5d-4d44-b539-37b261af55ca",
+        dealId: "3ceb51c2-c97b-4354-88b6-1d9499eba809",
         image:
           "https://res.cloudinary.com/dj6tlm5xx/image/upload/v1665413009/projects/curel1_mcffct.jpg",
       },
       {
-        dealId: "1edf02f8-cd5d-4d44-b539-37b261af55ca",
+        dealId: "3ceb51c2-c97b-4354-88b6-1d9499eba809",
         image:
           "https://res.cloudinary.com/dj6tlm5xx/image/upload/v1665412938/projects/jnpnhjxddva3natnoryd.jpg",
       },
