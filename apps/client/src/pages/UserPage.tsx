@@ -38,7 +38,8 @@ const UserPage = () => {
         return axios.get(`/api/votes/byuser/${userid}`).then((res)=>{
           console.log(res.data)
           let totalUpvotes = 0
-          res.data.forEach((vote: IVotes)=>vote.voteStatus===1||totalUpvotes++)
+          res.data.forEach((vote: IVotes)=>vote.voteStatus===1&&totalUpvotes++)
+          console.log(totalUpvotes)
           setUpvotes(totalUpvotes)}
           // setUpvotes(
           // res.data.Deals.reduce((acc: number, obj: IDeal) => {
