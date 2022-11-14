@@ -13,6 +13,7 @@ const DealController = require("./controller/DealController");
 const DealImagesController = require("./controller/DealImagesController");
 const CategoryController = require("./controller/CategoryController");
 const VoteController = require("./controller/VoteController");
+
 //////////////////////////////////////////////////////
 //// * Middleware
 //////////////////////////////////////////////////////

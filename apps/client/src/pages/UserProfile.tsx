@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { IUser } from "../Interface";
+import { IUser, IVotes } from "../Interface";
 import format from "date-fns/format";
 import MediaCard from "../components/MediaCard";
 import { Box } from "@mui/system";
@@ -21,7 +21,7 @@ const UserProfile = () => {
   const payload = parseJwt(token);
   const id = payload.id;
 
-  const [upvotes, setUpvotes] = useState();
+  const [upvotes, setUpvotes] = useState(0);
   const [user, setUser] = useState<IUser>({
     id: "",
     username: "",
@@ -37,11 +37,15 @@ const UserProfile = () => {
       .get(`/api/user/${id}`)
       .then((res) => {
         setUser(res.data);
-        setUpvotes(
-          res.data.Deals.reduce((acc: number, obj: IDeal) => {
-            return acc + obj.totalUpvotes;
-          }, 0)
+        return axios.get(`/api/votes/byuser/${id}`);
+      })
+      .then((res) => {
+        let totalUpvotes = 0;
+        console.log(res.data);
+        res.data.forEach(
+          (votes: IVotes) => votes.voteStatus === 1 && (totalUpvotes += 1)
         );
+        setUpvotes(totalUpvotes);
       })
       .catch((err) => console.log(err));
   }, []);
