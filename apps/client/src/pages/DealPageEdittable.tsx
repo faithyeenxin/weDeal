@@ -43,8 +43,6 @@ const DealPageEdittable = () => {
     dealPostedDate: new Date(),
     dealExpiry: new Date(),
     categoryId: "",
-    totalUpvotes: 0,
-    totalDownvotes: 0,
     DealImages: [],
     Votes: [],
   });
