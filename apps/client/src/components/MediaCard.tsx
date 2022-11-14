@@ -132,7 +132,7 @@ const MediaCard = ({ item }: MediaCardProps) => {
         console.log(err);
       });
   };
-  console.log(item.Votes);
+  
   return (
     <Card
       sx={{
@@ -204,9 +204,6 @@ const MediaCard = ({ item }: MediaCardProps) => {
                   <ThumbDownOffAltIcon
                     sx={
                       item.Votes.some((item) => {
-                        console.log(`vote's userId: ${item.userId}`);
-                        console.log(`logged in user id: ${id}`);
-                        console.log(item.userId === id);
                         return item.userId === id && item.voteStatus === -1;
                       })
                         ? { color: "red" }

@@ -28,16 +28,23 @@ const UserPage = () => {
     dateJoined: new Date(),
     Deals: [],
   });
+
   useEffect(() => {
     axios
       .get(`/api/user/${userid}`)
       .then((res) => {
         setUser(res.data);
-        setUpvotes(
-          res.data.Deals.reduce((acc: number, obj: IDeal) => {
-            return acc + obj.totalUpvotes;
-          }, 0)
-        );
+        console.log(res.data)
+        return axios.get(`/api/votes/byuser/${userid}`).then((res)=>{
+          console.log(res.data)
+          let totalUpvotes = 0
+          res.data.forEach((vote)=>vote.voteStatus===1||totalUpvotes++)
+          setUpvotes(totalUpvotes)}
+          // setUpvotes(
+          // res.data.Deals.reduce((acc: number, obj: IDeal) => {
+          //   return acc + obj.totalUpvotes;
+          // }, 0))
+          );
       })
       .catch((err) => console.log(err));
   }, []);
