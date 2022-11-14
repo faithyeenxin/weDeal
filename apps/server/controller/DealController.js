@@ -11,7 +11,7 @@ router.get("/seed", async (req, res) => {
   const seedDeal = await prisma.deal.createMany({
     data: [
       {
-        userId: "73b029af-2571-49ca-aa10-d8a907f72784",
+        userId: "8b1f6c90-5ccb-4147-8d73-58d6ac0adfda",
         name: "Curel Moisturizer for Sensitive Skin",
         retailPrice: 16.9,
         discountedPrice: 10.9,
@@ -19,7 +19,7 @@ router.get("/seed", async (req, res) => {
         locationAddress: "postal code/ long+ lat here",
         dealPostedDate: new Date(2022, 10, 01),
         dealExpiry: new Date(2023, 11, 20),
-        categoryId: "50028acb-f97f-49a5-8a78-25df1ae53ad0",
+        categoryId: "78c4656c-716a-4d28-9ca8-a9bd25b0c6f5",
       },
     ],
   });
