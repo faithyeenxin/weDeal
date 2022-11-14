@@ -13,11 +13,11 @@ import { IUser } from "../Interface";
 import format from "date-fns/format";
 import MediaCard from "../components/MediaCard";
 import { Box } from "@mui/system";
-import { IDeal } from "../Interface";
+import { IDeal, IVotes } from "../Interface";
 import MediaCardEdittable from "../components/MediaCardEdittabe";
 const UserPage = () => {
   const { userid } = useParams();
-  const [upvotes, setUpvotes] = useState();
+  const [upvotes, setUpvotes] = useState(0);
   const [user, setUser] = useState<IUser>({
     id: "",
     username: "",
@@ -38,7 +38,7 @@ const UserPage = () => {
         return axios.get(`/api/votes/byuser/${userid}`).then((res)=>{
           console.log(res.data)
           let totalUpvotes = 0
-          res.data.forEach((vote)=>vote.voteStatus===1||totalUpvotes++)
+          res.data.forEach((vote: IVotes)=>vote.voteStatus===1||totalUpvotes++)
           setUpvotes(totalUpvotes)}
           // setUpvotes(
           // res.data.Deals.reduce((acc: number, obj: IDeal) => {
