@@ -46,6 +46,7 @@ const DealPageEdittable = () => {
     totalUpvotes: 0,
     totalDownvotes: 0,
     DealImages: [],
+    Votes: [],
   });
 
   useEffect(() => {
