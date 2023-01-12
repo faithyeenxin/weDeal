@@ -8,6 +8,7 @@ const SearchBar = () => {
   const [nameSearch, setNameSearch] = useState("");
   const [location, setLocation] = useState("");
   const [categoryId, setCategoryId] = useState("");
+
   const {
     data: searchedDeals, //renaming the data to "deals"
     isLoading,

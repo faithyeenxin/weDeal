@@ -35,7 +35,6 @@ function App() {
           <Route path="/add-deal" element={<AddDealPage />} />
           <Route path="/deal/:dealid" element={<DealPage />} />
           <Route path="/user/:userid" element={<UserPage />} />
-
           <Route path="/deal-edit/:dealid" element={<DealPageEdittable />} />
         </Route>
       </Routes>

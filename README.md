@@ -1,4 +1,7 @@
-Feel free to check out my slideshow here: https://docs.google.com/presentation/d/1x-Y05ApK71mBmouzAFXfAy1lQdzw5arcRckHGOH-OGY/edit?usp=sharing
+Visit my website: http://wedeal.onrender.com/
+(please note that this is a hosted website so it will take some time to load)
+
+To check out my slideshow: https://docs.google.com/presentation/d/1x-Y05ApK71mBmouzAFXfAy1lQdzw5arcRckHGOH-OGY/edit?usp=sharing
 
 ![](https://github.com/faithyeenxin/weDeal/blob/main/slides/weDeal.jpg)
 ![](<https://github.com/faithyeenxin/weDeal/blob/main/slides/weDeal%20(1).jpg>)
