@@ -13,7 +13,8 @@
   "scripts": {
     "build": "turbo build",
     "start": "cd apps/server && npm run start",
-    "generate": "cd apps/server && npx prisma generate"
+    "generate": "cd apps/server && npx prisma generate",
+    "dev": "turbo run dev"
   },
   "author": "",
   "license": "ISC",
