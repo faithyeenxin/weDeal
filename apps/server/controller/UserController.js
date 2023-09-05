@@ -1,3 +1,5 @@
+/** @format */
+
 const express = require("express");
 const router = express.Router();
 
@@ -16,6 +18,7 @@ router.get("/seed", async (req, res) => {
   const seedUsers = await prisma.user.createMany({
     data: [
       {
+        //id: "0601a53a-aafc-4b7f-a8e4-b7bfb18daddf"
         username: "admin123",
         password: bcrypt.hashSync("password123", 10),
         name: "Administrator",
@@ -25,6 +28,7 @@ router.get("/seed", async (req, res) => {
         dateJoined: new Date(2022, 10, 05),
       },
       {
+        //id: "a24be4cb-15fb-43bd-aa8e-179bf4808302"
         username: "ben123",
         password: bcrypt.hashSync("ben123", 10),
         name: "Benjamine",
@@ -34,6 +38,7 @@ router.get("/seed", async (req, res) => {
         dateJoined: new Date(2022, 10, 02),
       },
       {
+        //id: "1617803f-ebef-44ab-8183-6b73b7272276"
         username: "chelsea123",
         password: bcrypt.hashSync("chelsea123", 10),
         name: "Chelsea",
@@ -43,6 +48,7 @@ router.get("/seed", async (req, res) => {
         dateJoined: new Date(2022, 10, 03),
       },
       {
+        //id: "91e9064b-e512-4352-988d-a39712ff2e3a"
         username: "dominique123",
         password: bcrypt.hashSync("dom123", 10),
         name: "Dominique",
@@ -52,6 +58,7 @@ router.get("/seed", async (req, res) => {
         dateJoined: new Date(2022, 10, 04),
       },
       {
+        // id: "1b8608d8-4161-4165-8f86-76c1f6943895"
         username: "byfaithx",
         password: bcrypt.hashSync("Faithyeenx5!", 10),
         name: "Faith",
