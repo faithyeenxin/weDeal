@@ -1,14 +1,14 @@
-import { useGetAllDealsQuery } from "../features/api/dealSlice";
+import { useGetAllDealsQuery } from '../features/api/dealSlice';
 
-import { Card, Grid, Paper, Typography } from "@mui/material";
-import Container from "@mui/material/Container";
-import Image from "../../public/happy-shopping.jpeg";
-import MediaCard from "../components/MediaCard";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { IDeal } from "../Interface";
-import { json } from "react-router-dom";
-import MediaCardDisplayOnly from "../components/MediaCardDisplayOnly";
+import { Card, Grid, Paper, Typography, alpha } from '@mui/material';
+import Container from '@mui/material/Container';
+import Image from '../../public/happy-shopping.jpeg';
+import MediaCard from '../components/MediaCard';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { IDeal } from '../Interface';
+import { json } from 'react-router-dom';
+import MediaCardDisplayOnly from '../components/MediaCardDisplayOnly';
 
 const LandingPage = () => {
   const {
@@ -29,7 +29,7 @@ const LandingPage = () => {
         rowSpacing={3}
         columnSpacing={1}
         sx={{
-          display: "flex",
+          display: 'flex',
         }}
       >
         {deals.map((item) => {
@@ -41,9 +41,9 @@ const LandingPage = () => {
               sm={6}
               md={3}
               sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
               }}
             >
               <MediaCardDisplayOnly item={item} />
@@ -59,10 +59,10 @@ const LandingPage = () => {
     <>
       <Paper
         sx={{
-          padding: "45vh 0vh 18vh 0vh",
+          padding: '20vh 0vh 18vh 0vh',
           backgroundImage: `url(${Image})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center center",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
           mt: -1,
           mr: -1,
           ml: -1,
@@ -70,27 +70,27 @@ const LandingPage = () => {
       >
         <Container>
           <Typography
-            variant="h2"
+            variant='h2'
             sx={{
-              fontFamily: "Futura",
-              color: "#fbb002",
-              fontWeight: "bold",
+              fontFamily: 'Futura',
+              color: '#fbb002',
+              fontWeight: 'bold',
               letterSpacing: 6,
             }}
-            align="center"
+            align='center'
           >
             Deals are best enjoyed together
           </Typography>
 
           <Typography
-            variant="h3"
+            variant='h3'
             sx={{
-              fontFamily: "Futura",
-              color: "#e46e00",
-              padding: "1vh 0vh",
-              fontStyle: "italic",
+              fontFamily: 'Futura',
+              color: '#e46e00',
+              padding: '1vh 0vh',
+              fontStyle: 'italic',
             }}
-            align="center"
+            align='center'
             gutterBottom
           >
             join our robust community now!
