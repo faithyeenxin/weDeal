@@ -103,6 +103,7 @@ declare module '@mui/material/Typography' {
     h7: true;
     body1?: true;
     body2?: true;
+    logo?: true;
   }
 }
 
