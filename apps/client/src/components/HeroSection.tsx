@@ -1,4 +1,4 @@
-import { Box, Container, Grid } from '@mui/material';
+import { Box, Container, Grid, Typography } from '@mui/material';
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import useBreakpoints from '../hooks/useBreakpoints';
@@ -21,14 +21,51 @@ export const HeroSection = () => {
             overflow: 'hidden',
           }}
         >
+          <Box
+            sx={{
+              position: 'absolute',
+              right: 0,
+              zIndex: 2,
+              paddingX: 1,
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}
+          >
+            <Box display='flex' flexDirection='column' alignItems='center'>
+              <Typography
+                variant='h3'
+                color={theme.palette.weDeal?.neutral.white}
+              >
+                Spend Less,
+              </Typography>
+              <Typography
+                variant='h3'
+                color={theme.palette.weDeal?.neutral.white}
+              >
+                Love More.
+              </Typography>
+            </Box>
+            <Typography
+              variant='body2'
+              color={theme.palette.weDeal?.neutral.white}
+            >
+              Save money on the things you love, <br /> spend it on the people
+              you love.
+            </Typography>
+          </Box>
           <div
             style={{
+              position: 'absolute',
+              left: 0,
+              zIndex: 1,
               backgroundImage: `url(${HeroOne})`,
               backgroundSize: 'cover',
-              borderTopRightRadius: '30px',
-              borderBottomRightRadius: '30px',
+              borderTopRightRadius: isMediumScreen ? '0px' : '30px',
+              borderBottomRightRadius: isMediumScreen ? '0px' : '30px',
               backgroundPosition: 'center',
-              width: '60%',
+              width: isMediumScreen ? '100%' : '60%',
               height: '100%',
             }}
           />
@@ -37,7 +74,7 @@ export const HeroSection = () => {
           <Box
             sx={{
               position: 'relative',
-              backgroundColor: theme.palette.weDeal?.primary?.default,
+              backgroundColor: theme.palette.weDeal?.secondary?.lighter,
               borderRadius: 3,
               width: '100%',
               height: 200,
@@ -51,11 +88,50 @@ export const HeroSection = () => {
                 backgroundImage: `url(${HeroTwo})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-                width: '60%',
+                width: '50%',
                 height: '100%',
                 borderTopLeftRadius: '30px',
               }}
             />
+            <Box
+              sx={{
+                position: 'absolute',
+                left: 0,
+                zIndex: 2,
+                paddingX: 2,
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <Box display='flex' flexDirection='column'>
+                <Typography
+                  variant='h3'
+                  color={theme.palette.weDeal?.neutral.white}
+                >
+                  Every kinda
+                </Typography>
+                <Typography
+                  variant='h3'
+                  color={theme.palette.weDeal?.neutral.white}
+                >
+                  thing for every
+                </Typography>
+                <Typography
+                  variant='h3'
+                  color={theme.palette.weDeal?.neutral.white}
+                >
+                  kinda person
+                </Typography>
+              </Box>
+              <Typography
+                variant='body2'
+                color={theme.palette.weDeal?.neutral.white}
+              >
+                Discover the best deals today!
+              </Typography>
+            </Box>
           </Box>
         )}
       </Box>

@@ -11,6 +11,7 @@ declare module '@mui/material/styles' {
         };
         secondary?: {
           default?: string;
+          lighter?: string;
         };
         tertiary?: {
           default?: string;
@@ -21,6 +22,9 @@ declare module '@mui/material/styles' {
         success?: {
           default?: string;
         };
+        neutral: {
+          white?: string;
+        };
       };
     };
   }
@@ -28,13 +32,12 @@ declare module '@mui/material/styles' {
   interface PaletteOptions {
     weDeal?: {
       primary?: {
-        default?: string; // default color: corporate blue
+        default?: string;
         lighter?: string;
-        defaultFilter?: string;
-        lighterFilter?: string;
       };
       secondary?: {
-        default?: string; // secondary color: cream yellow
+        default?: string;
+        lighter?: string;
       };
       tertiary?: {
         default?: string;
@@ -44,6 +47,9 @@ declare module '@mui/material/styles' {
       };
       success?: {
         default?: string;
+      };
+      neutral: {
+        white?: string;
       };
     };
   }
@@ -110,6 +116,7 @@ const initCustomTheme = createTheme({
       },
       secondary: {
         default: '#FFAD1D', // yellow orange
+        lighter: '#FF6931',
       },
       tertiary: {
         default: '#F8F7F7', // faded grey
@@ -119,6 +126,9 @@ const initCustomTheme = createTheme({
       },
       success: {
         default: '#19867F',
+      },
+      neutral: {
+        white: '#FFFFFF',
       },
     },
   },
@@ -302,10 +312,10 @@ const theme = createTheme({
     // Standard text for paragraph
     body2: {
       fontFamily: 'Barlow',
-      fontSize: '16px',
+      fontSize: '14px',
       fontWeight: 400,
       textTransform: 'none',
-      lineHeight: '150%',
+      lineHeight: '100%',
       textAlign: 'justify',
       color: initCustomTheme.palette?.PCLab?.text?.primary,
       [initCustomTheme.breakpoints.down('sm')]: {
