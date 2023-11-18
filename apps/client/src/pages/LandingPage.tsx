@@ -10,6 +10,7 @@ import { IDeal } from '../Interface';
 import { json, useSearchParams } from 'react-router-dom';
 import MediaCardDisplayOnly from '../components/MediaCardDisplayOnly';
 import SearchBar from '../components/SearchBar';
+import { HeroSection } from '../components/HeroSection';
 
 const LandingPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -67,6 +68,7 @@ const LandingPage = () => {
   return (
     <>
       <SearchBar />
+      <HeroSection />
       <Container sx={{ mt: 2, mb: 5 }}>{content}</Container>;
     </>
   );

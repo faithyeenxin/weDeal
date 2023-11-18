@@ -14,31 +14,39 @@ import PrivateRoute from './UIUX/PrivateRoute';
 import DealPage from './pages/DealPage';
 import DealPageEdittable from './pages/DealPageEdittable';
 import UserPage from './pages/UserPage';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme';
+
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* for all */}
-        <Route path='/' element={<NavBar />}>
-          <Route index element={<LandingPage />} />
-          <Route path='/register' element={<RegisterPage />} />
-          <Route path='/login' element={<LoginPage />} />
-        </Route>
-        <Route path='/testing' element={<Testing />} />
-        <Route path='/login-redirect' element={<LoginRedirect />} />
-        <Route path='/register-redirect' element={<RegisterRedirect />} />
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Routes>
+          {/* for all */}
+          <Route path='/' element={<NavBar />}>
+            <Route index element={<LandingPage />} />
+            <Route path='/register' element={<RegisterPage />} />
+            <Route path='/login' element={<LoginPage />} />
+          </Route>
+          <Route path='/testing' element={<Testing />} />
+          <Route path='/login-redirect' element={<LoginRedirect />} />
+          <Route path='/register-redirect' element={<RegisterRedirect />} />
 
-        {/* private routes */}
-        <Route path='/' element={<PrivateRoute outlet={<LoggedOnNavBar />} />}>
-          <Route path='/home' element={<HomePage />} />
-          <Route path='/profile' element={<UserProfile />} />
-          <Route path='/add-deal' element={<AddDealPage />} />
-          <Route path='/deal/:dealid' element={<DealPage />} />
-          <Route path='/user/:userid' element={<UserPage />} />
-          <Route path='/deal-edit/:dealid' element={<DealPageEdittable />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+          {/* private routes */}
+          <Route
+            path='/'
+            element={<PrivateRoute outlet={<LoggedOnNavBar />} />}
+          >
+            <Route path='/home' element={<HomePage />} />
+            <Route path='/profile' element={<UserProfile />} />
+            <Route path='/add-deal' element={<AddDealPage />} />
+            <Route path='/deal/:dealid' element={<DealPage />} />
+            <Route path='/user/:userid' element={<UserPage />} />
+            <Route path='/deal-edit/:dealid' element={<DealPageEdittable />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
