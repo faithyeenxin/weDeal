@@ -21,16 +21,7 @@ const LoginPage = () => {
             justifyContent: 'center',
             alignItems: 'center',
           }}
-        >
-          {/* <video
-            autoPlay
-            loop
-            muted
-            style={{ position: "fixed", zIndex: "-1", width: "100%" }}
-          >
-            <source src={shoppingMan} type="video/mp4" />
-          </video> */}
-        </Grid>
+        ></Grid>
         <Grid
           item
           xs={12}
@@ -45,10 +36,8 @@ const LoginPage = () => {
           }}
         >
           <Box sx={{ p: '2rem' }}>
-            <Box sx={{ mb: '3rem' }}>
-              <Typography variant='h2' sx={{ color: '#f0deac' }}>
-                Welcome Back!
-              </Typography>
+            <Box sx={{ mb: '2rem' }}>
+              <Typography variant='h2'>Welcome Back!</Typography>
             </Box>
 
             <LoginForm />

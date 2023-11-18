@@ -66,11 +66,11 @@ const LandingPage = () => {
     content = <p>There's an error</p>;
   }
   return (
-    <>
+    <Box sx={{ marginTop: 8 }}>
       <SearchBar />
       <HeroSection />
       <Container sx={{ mt: 2, mb: 5 }}>{content}</Container>;
-    </>
+    </Box>
   );
 };
 

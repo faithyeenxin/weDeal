@@ -183,7 +183,8 @@ const theme = createTheme({
       textTransform: 'none',
       lineHeight: '120%',
       textAlign: 'left',
-      background: `linear-gradient(90deg, ${initCustomTheme.palette?.PCLab?.primary?.default} 0%, ${initCustomTheme.palette?.PCLab?.text?.primary} 100%)`,
+      background:
+        'linear-gradient(90deg, #FE400E 0%, #FF5935 47.4%, #FFAD1D 100%)',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
       backgroundClip: 'text',
@@ -210,7 +211,12 @@ const theme = createTheme({
       textTransform: 'none',
       lineHeight: '120%',
       textAlign: 'left',
-      color: initCustomTheme.palette?.PCLab?.primary?.default,
+      // background:
+      //   'linear-gradient(90deg, #FE400E 0%, #FF5935 47.4%, #FFAD1D 100%)',
+      // WebkitBackgroundClip: 'text',
+      // WebkitTextFillColor: 'transparent',
+      // backgroundClip: 'text',
+      // TextFillColor: 'transparent',
       [initCustomTheme.breakpoints.down('md')]: {
         fontSize: '32px',
       },

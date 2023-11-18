@@ -57,7 +57,7 @@ const NavBar = () => {
           </Box>
         </Box>
       </AppBar>
-      <Toolbar />
+      {/* <Toolbar /> */}
       <Outlet />
     </Box>
   );
