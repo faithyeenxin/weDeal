@@ -106,6 +106,7 @@ const SearchBar = () => {
                 color: '#f2f2f2',
                 letterSpacing: '0.1rem',
                 fontWeight: 600,
+                borderRadius: 3,
                 '&:hover': {
                   background: `linear-gradient(90deg, #FFAD1D 0%, #FF5935 47.4%, #FE400E 100%)`,
                 },

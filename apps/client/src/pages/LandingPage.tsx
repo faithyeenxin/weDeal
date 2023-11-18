@@ -1,23 +1,32 @@
-import { useGetAllDealsQuery } from '../features/api/dealSlice';
+import { useSearchAllDealsQuery } from '../features/api/dealSlice';
 
-import { Card, Grid, Paper, Typography, alpha } from '@mui/material';
+import { Box, Card, Grid, Paper, Typography, alpha } from '@mui/material';
 import Container from '@mui/material/Container';
 import Image from '../../public/happy-shopping.jpeg';
 import MediaCard from '../components/MediaCard';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { IDeal } from '../Interface';
-import { json } from 'react-router-dom';
+import { json, useSearchParams } from 'react-router-dom';
 import MediaCardDisplayOnly from '../components/MediaCardDisplayOnly';
+import SearchBar from '../components/SearchBar';
 
 const LandingPage = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const {
     data: deals, //renaming the data to "deals"
     isLoading,
     isSuccess,
     isError,
-  } = useGetAllDealsQuery(null, { pollingInterval: 5000 });
-
+  } = useSearchAllDealsQuery(
+    {
+      name: searchParams.get(`name`) ?? '',
+      category: searchParams.get(`category`) ?? '',
+      location: searchParams.get(`location`) ?? '',
+    },
+    { pollingInterval: 1000 }
+  );
   let content;
 
   if (isLoading) {
@@ -37,8 +46,8 @@ const LandingPage = () => {
             <Grid
               item
               key={item.id}
-              xs={12}
-              sm={6}
+              xs={6}
+              sm={4}
               md={3}
               sx={{
                 display: 'flex',
@@ -55,7 +64,12 @@ const LandingPage = () => {
   } else if (isError) {
     content = <p>There's an error</p>;
   }
-  return <Container sx={{ mt: 5, mb: 5 }}>{content}</Container>;
+  return (
+    <>
+      <SearchBar />
+      <Container sx={{ mt: 2, mb: 5 }}>{content}</Container>;
+    </>
+  );
 };
 
 export default LandingPage;

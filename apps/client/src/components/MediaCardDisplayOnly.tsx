@@ -116,8 +116,8 @@ const MediaCardDisplayOnly = ({ item }: MediaCardDisplayOnlyProps) => {
   return (
     <Card
       sx={{
-        width: 250,
-        height: 430,
+        width: '100%',
+        height: '100%',
       }}
     >
       <Grid container sx={{ mt: 2, mb: 2 }}>
