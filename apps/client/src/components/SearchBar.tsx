@@ -1,13 +1,27 @@
-import { Button, Container, Grid, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-import CategoryField from "./CategoryField";
-import { useSearchAllDealsQuery } from "../features/api/dealSlice";
-import { useSearchParams } from "react-router-dom";
+import { Button, Container, Grid, TextField, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { useEffect, useState } from 'react';
+import CategoryField from './CategoryField';
+import { useSearchAllDealsQuery } from '../features/api/dealSlice';
+import { useSearchParams } from 'react-router-dom';
+import { useTheme } from '@mui/material/styles';
+
+const CustomButton = styled(Button)({
+  background: `linear-gradient(90deg, #FE400E 0%, #FF5935 47.4%, #FFAD1D 100%)`,
+  color: '#f2f2f2',
+  letterSpacing: '0.1rem',
+  fontWeight: 600,
+  '&:hover': {
+    background: '#FF2E00',
+  },
+});
+
 const SearchBar = () => {
+  const theme = useTheme();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [nameSearch, setNameSearch] = useState("");
-  const [location, setLocation] = useState("");
-  const [categoryId, setCategoryId] = useState("");
+  const [nameSearch, setNameSearch] = useState('');
+  const [location, setLocation] = useState('');
+  const [categoryId, setCategoryId] = useState('');
 
   const {
     data: searchedDeals, //renaming the data to "deals"
@@ -15,9 +29,9 @@ const SearchBar = () => {
     isSuccess,
     isError,
   } = useSearchAllDealsQuery({
-    name: searchParams.get(`name`) ?? "",
-    category: searchParams.get(`category`) ?? "",
-    location: searchParams.get(`location`) ?? "",
+    name: searchParams.get(`name`) ?? '',
+    category: searchParams.get(`category`) ?? '',
+    location: searchParams.get(`location`) ?? '',
   });
 
   const handleSubmit = (e: any) => {
@@ -36,24 +50,27 @@ const SearchBar = () => {
           container
           spacing={0.5}
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
           <Grid item xs={12} sm={12} md={6}>
             <TextField
-              size="small"
-              autoComplete="off"
-              id="nameSearch"
-              name="nameSearch"
+              size='small'
+              autoComplete='off'
+              id='nameSearch'
+              name='nameSearch'
               onChange={(e: any) => {
                 setNameSearch(e.target.value);
               }}
-              type="text"
-              label="Search for anything!"
+              type='text'
+              label='Search for anything!'
               sx={{
-                width: "100%",
+                width: '100%',
+                backgroundColor: '#F8F7F7',
+                '& fieldset': { border: 'none' },
+                borderRadius: 2,
               }}
             />
           </Grid>
@@ -62,31 +79,35 @@ const SearchBar = () => {
           </Grid>
           <Grid item xs={12} sm={4} md={2}>
             <TextField
-              size="small"
-              autoComplete="off"
-              id="location"
-              name="location"
+              size='small'
+              autoComplete='off'
+              id='location'
+              name='location'
               onChange={(e: any) => {
                 setLocation(e.target.value);
               }}
-              type="text"
-              label="Location"
+              type='text'
+              label='Location'
               sx={{
-                width: "100%",
+                width: '100%',
+                backgroundColor: '#F8F7F7',
+                borderRadius: 3,
+                '& fieldset': { border: 'none' },
               }}
             />
           </Grid>
           <Grid item xs={12} sm={4} md={2}>
             <Button
-              type="submit"
+              fullWidth
+              type='submit'
+              size='large'
               sx={{
-                backgroundColor: "#fbb002",
-                color: "#f2f2f2",
-                letterSpacing: "0.1rem",
-
-                width: "100%",
-                "&:hover": {
-                  backgroundColor: "#a1c060",
+                background: `linear-gradient(90deg, #FE400E 0%, #FF5935 47.4%, #FFAD1D 100%)`,
+                color: '#f2f2f2',
+                letterSpacing: '0.1rem',
+                fontWeight: 600,
+                '&:hover': {
+                  background: `linear-gradient(90deg, #FFAD1D 0%, #FF5935 47.4%, #FE400E 100%)`,
                 },
               }}
             >

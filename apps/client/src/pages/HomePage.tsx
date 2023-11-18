@@ -1,15 +1,15 @@
-import { useGetAllDealsQuery } from "../features/api/dealSlice";
-import { useSearchAllDealsQuery } from "../features/api/dealSlice";
-import { useSearchParams } from "react-router-dom";
+import { useGetAllDealsQuery } from '../features/api/dealSlice';
+import { useSearchAllDealsQuery } from '../features/api/dealSlice';
+import { useSearchParams } from 'react-router-dom';
 
-import { useState, useEffect } from "react";
-import axios from "axios";
-import SearchBar from "../components/SearchBar";
-import { IDeal } from "../Interface";
-import { Box, Grid, Typography } from "@mui/material";
-import MediaCard from "../components/MediaCard";
-import { Container } from "@mui/system";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import SearchBar from '../components/SearchBar';
+import { IDeal } from '../Interface';
+import { Box, Grid, Typography } from '@mui/material';
+import MediaCard from '../components/MediaCard';
+import { Container } from '@mui/system';
+import { useParams } from 'react-router-dom';
 const Home = () => {
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -21,9 +21,9 @@ const Home = () => {
     isError,
   } = useSearchAllDealsQuery(
     {
-      name: searchParams.get(`name`) ?? "",
-      category: searchParams.get(`category`) ?? "",
-      location: searchParams.get(`location`) ?? "",
+      name: searchParams.get(`name`) ?? '',
+      category: searchParams.get(`category`) ?? '',
+      location: searchParams.get(`location`) ?? '',
     },
     { pollingInterval: 1000 }
   );
@@ -56,7 +56,7 @@ const Home = () => {
         rowSpacing={3}
         columnSpacing={1}
         sx={{
-          display: "flex",
+          display: 'flex',
         }}
       >
         {deals.map((item) => {
@@ -68,9 +68,9 @@ const Home = () => {
               sm={6}
               md={3}
               sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
               }}
             >
               <MediaCard item={item} />
@@ -84,32 +84,24 @@ const Home = () => {
   }
   return (
     <>
-      <Box sx={{ marginTop: "1.5%" }}>
+      <Box sx={{ marginTop: '1.5%' }}>
         <SearchBar />
       </Box>
-      <Container sx={{ mt: 5, mb: 5 }}>
-        <Typography
-          variant="h3"
-          sx={{
-            fontWeight: "bold",
-            mb: 3,
-            letterSpacing: "0.025rem",
-            fontStyle: "italic",
-            color: "#fbb001",
-          }}
-        >
-          Just added!
-        </Typography>
+      <Container
+        sx={{
+          mt: 5,
+          mb: 5,
+        }}
+      >
         <Grid
           container
           spacing={0.5}
           sx={{
-            display: "flex",
+            display: 'flex',
           }}
         >
           {content}
         </Grid>
-
       </Container>
     </>
   );

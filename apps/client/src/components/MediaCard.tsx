@@ -1,5 +1,5 @@
 // import { useSearchAllVotesByDealIdQuery } from "../features/api/votesSlice";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 import {
   Card,
@@ -11,22 +11,22 @@ import {
   IconButton,
   Grid,
   CardHeader,
-} from "@mui/material";
+} from '@mui/material';
 
-import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
-import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
-import TextsmsIcon from "@mui/icons-material/Textsms";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { IDeal, IUser, IVotes } from "../Interface";
-import intervalToDuration from "date-fns/intervalToDuration";
-import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
-import { useAddUpvoteMutation } from "../features/api/votesSlice";
-import parseJwt from "../UIUX/parseJwt";
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
+import TextsmsIcon from '@mui/icons-material/Textsms';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { IDeal, IUser, IVotes } from '../Interface';
+import intervalToDuration from 'date-fns/intervalToDuration';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { useAddUpvoteMutation } from '../features/api/votesSlice';
+import parseJwt from '../UIUX/parseJwt';
 const positionSx = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 };
 
 interface MediaCardProps {
@@ -44,7 +44,7 @@ const uploadTimeFormat = {
 
 const MediaCard = ({ item }: MediaCardProps) => {
   const navigate = useNavigate();
-  const token: any = sessionStorage.getItem("token");
+  const token: any = sessionStorage.getItem('token');
   const payload = parseJwt(token);
   const id = payload.id;
 
@@ -132,7 +132,7 @@ const MediaCard = ({ item }: MediaCardProps) => {
         console.log(err);
       });
   };
-  
+
   return (
     <Card
       sx={{
@@ -140,32 +140,32 @@ const MediaCard = ({ item }: MediaCardProps) => {
         height: 430,
       }}
     >
-      <Typography sx={{ textAlign: "right", mr: 1 }}>
+      <Typography variant='body2' sx={{ textAlign: 'right', mr: 1 }}>
         {uploadedTimeString}
       </Typography>
       <CardMedia
-        component="img"
-        height="200"
+        component='img'
+        height='200'
         image={item?.DealImages[0]?.image}
-        sx={{ mt: "5%", mb: "5%" }}
+        sx={{ mt: '5%', mb: '5%' }}
       />
-      <CardContent sx={{ height: "130px" }}>
+      <CardContent sx={{ height: '130px' }}>
         <Typography
           gutterBottom
-          variant="h6"
-          sx={{ fontFamily: "Arial", pb: 0, color: "#fbb002" }}
-          component="div"
+          variant='h7'
+          sx={{ fontFamily: 'Arial', pb: 0, color: '#fbb002' }}
+          component='div'
         >
           {item.name.slice(0, 40)}...
         </Typography>
         <Grid container spacing={1} sx={{ mb: 1 }}>
           <Grid item>
             <Typography
-              variant="h5"
+              variant='body2'
               sx={{
-                fontFamily: "Arial",
-                textDecoration: "line-through",
-                color: "gray",
+                fontFamily: 'Arial',
+                textDecoration: 'line-through',
+                color: 'gray',
               }}
             >
               ${item.retailPrice}
@@ -173,11 +173,11 @@ const MediaCard = ({ item }: MediaCardProps) => {
           </Grid>
           <Grid item>
             <Typography
-              variant="h5"
+              variant='body2'
               sx={{
-                fontFamily: "Arial",
+                fontFamily: 'Arial',
 
-                color: "red",
+                color: 'red',
               }}
             >
               ${item.discountedPrice}
@@ -186,9 +186,9 @@ const MediaCard = ({ item }: MediaCardProps) => {
         </Grid>
         <Grid container>
           <Typography
-            variant="h6"
-            sx={{ fontFamily: "Arial" }}
-            color="text.secondary"
+            variant='body2'
+            sx={{ fontFamily: 'Arial' }}
+            color='text.secondary'
           >
             {item.location}
           </Typography>
@@ -206,14 +206,14 @@ const MediaCard = ({ item }: MediaCardProps) => {
                       item.Votes.some((item) => {
                         return item.userId === id && item.voteStatus === -1;
                       })
-                        ? { color: "red" }
-                        : { color: "gray" }
+                        ? { color: 'red' }
+                        : { color: 'gray' }
                     }
                   />
                 </IconButton>
               </Grid>
               <Grid item md={4} sx={positionSx}>
-                <Typography variant="h5" sx={{ fontFamily: "Arial" }}>
+                <Typography variant='h5' sx={{ fontFamily: 'Arial' }}>
                   {totalVotes}
                 </Typography>
               </Grid>
@@ -225,8 +225,8 @@ const MediaCard = ({ item }: MediaCardProps) => {
                       item.Votes.some(
                         (item) => item.userId === id && item.voteStatus === 1
                       )
-                        ? { color: "green" }
-                        : { color: "gray" }
+                        ? { color: 'green' }
+                        : { color: 'gray' }
                     }
                   />
                 </IconButton>
@@ -238,9 +238,9 @@ const MediaCard = ({ item }: MediaCardProps) => {
             item
             xs={6}
             sx={{
-              display: "flex",
-              justifyContent: "right",
-              alignItems: "center",
+              display: 'flex',
+              justifyContent: 'right',
+              alignItems: 'center',
               pr: 0.5,
             }}
           >

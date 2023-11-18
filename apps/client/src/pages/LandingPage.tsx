@@ -55,52 +55,7 @@ const LandingPage = () => {
   } else if (isError) {
     content = <p>There's an error</p>;
   }
-  return (
-    <>
-      <Paper
-        sx={{
-          padding: '20vh 0vh 18vh 0vh',
-          backgroundImage: `url(${Image})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-          mt: -1,
-          mr: -1,
-          ml: -1,
-        }}
-      >
-        <Container>
-          <Typography
-            variant='h2'
-            sx={{
-              fontFamily: 'Futura',
-              color: '#fbb002',
-              fontWeight: 'bold',
-              letterSpacing: 6,
-            }}
-            align='center'
-          >
-            Deals are best enjoyed together
-          </Typography>
-
-          <Typography
-            variant='h3'
-            sx={{
-              fontFamily: 'Futura',
-              color: '#e46e00',
-              padding: '1vh 0vh',
-              fontStyle: 'italic',
-            }}
-            align='center'
-            gutterBottom
-          >
-            join our robust community now!
-          </Typography>
-          <br />
-        </Container>
-      </Paper>
-      <Container sx={{ mt: 5, mb: 5 }}>{content}</Container>
-    </>
-  );
+  return <Container sx={{ mt: 5, mb: 5 }}>{content}</Container>;
 };
 
 export default LandingPage;

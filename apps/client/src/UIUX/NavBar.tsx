@@ -1,133 +1,65 @@
-import { Button, Container, Grid, Typography } from "@mui/material";
-import { Box } from "@mui/system";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import { Outlet, useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
+import { Button, Container, Grid, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import { Outlet, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+
 const projectButtonSx = {
-  backgroundColor: "#fbb002",
-  color: "#f2f2f2",
-  letterSpacing: "0.1rem",
-  pl: "0.75rem",
-  pr: "0.75rem",
-  ml: 1,
-  mr: 1,
-  "&:hover": {
-    backgroundColor: "#a1c060",
+  display: 'flex',
+  color: '#FF2E00',
+  fontWeight: 700,
+  '&:hover': {
+    cursor: 'pointer',
+    color: '#FFAD1D',
   },
 };
 const NavBar = () => {
   const navigate = useNavigate();
 
   const registerHandler = () => {
-    navigate("/register");
+    navigate('/register');
   };
 
   const loginHandler = () => {
-    navigate("/login");
+    navigate('/login');
   };
   return (
-    <>
-      <AppBar>
-        <Toolbar
+    <Box>
+      <AppBar
+        sx={{
+          paddingX: '5%',
+          paddingY: 0.2,
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}
+        color='inherit'
+      >
+        <Typography
+          variant='logo'
           sx={{
-            backgroundColor: "#efe0d3",
+            cursor: 'pointer',
+          }}
+          onClick={() => {
+            navigate('/');
           }}
         >
-          <Grid
-            container
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          
-          >
-            <Grid
-              item
-              sm={6}
-              md={8}
-              lg={10}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                mb:1
-              }}
-            >
-              <LocalMallIcon
-                sx={{ mr: 1, color: "#fbb002", fontSize: "2.5rem" }}
-              />
-              <Typography
-                variant="h2"
-                sx={{
-                  color: "#fbb002",
-                  cursor: "pointer",
-                  flexGrow: 1,
-                }}
-                onClick={() => {
-                  navigate("/");
-                }}
-              >
-                weDeal
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              sm={6}
-              md={4}
-              lg={2}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Grid
-                container
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Grid
-                  item
-                  md={6}
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    mb: 1
-                  }}
-                >
-                  <Button sx={projectButtonSx} onClick={registerHandler}>
-                    Register
-                  </Button>
-                </Grid>
-                <Grid
-                  item
-                  md={6}
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    mb: 1
-                  }}
-                >
-                  <Button sx={projectButtonSx} onClick={loginHandler}>
-                    LogIn
-                  </Button>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Toolbar>
+          weDeal
+        </Typography>
+        <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+          <Box sx={projectButtonSx} onClick={registerHandler}>
+            <Typography variant='h6'>Get Started</Typography>
+          </Box>
+          <Box sx={projectButtonSx} onClick={loginHandler}>
+            <Typography variant='h6'>Login</Typography>
+          </Box>
+        </Box>
       </AppBar>
       <Toolbar />
       <Outlet />
-    </>
+    </Box>
   );
 };
 
