@@ -14,8 +14,18 @@ import {
 } from '@mui/material';
 import CustomButton from './CustomButton';
 
-const LoginForm: FC = () => {
+interface LoginFormProps {
+  initTestAcc: boolean;
+}
+
+const LoginForm = ({ initTestAcc }: LoginFormProps) => {
   const [error, setError] = useState<String>('');
+
+  useEffect(() => {
+    if (initTestAcc) {
+      generateTestAccount();
+    }
+  }, [initTestAcc]);
 
   const navigate = useNavigate();
 
@@ -55,6 +65,10 @@ const LoginForm: FC = () => {
     },
   });
 
+  const generateTestAccount = () => {
+    formik.setFieldValue('username', 'admin123');
+    formik.setFieldValue('password', 'password123'); // Replace 'newUsername' with the desired value
+  };
   return (
     <Box>
       <form onSubmit={formik.handleSubmit}>

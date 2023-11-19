@@ -70,7 +70,7 @@ const SearchBar = () => {
                 width: '100%',
                 backgroundColor: '#F8F7F7',
                 '& fieldset': { border: 'none' },
-                borderRadius: 2,
+                borderRadius: 3,
               }}
             />
           </Grid>

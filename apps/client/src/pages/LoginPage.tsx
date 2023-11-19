@@ -1,10 +1,13 @@
-import { Box, Grid, Paper, Typography } from '@mui/material';
+import { Box, Grid, Paper, Typography, useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
 import shoppingMan from '../../public/shopping_man.mp4';
 import Image from '../../public/mobile_bg.jpg';
+import { useState } from 'react';
 
 const LoginPage = () => {
+  const theme = useTheme();
+  const [initTestAcc, setInitTestAcc] = useState(false);
   return (
     <Box>
       <Grid container>
@@ -21,7 +24,7 @@ const LoginPage = () => {
             justifyContent: 'center',
             alignItems: 'center',
           }}
-        ></Grid>
+        />
         <Grid
           item
           xs={12}
@@ -40,7 +43,7 @@ const LoginPage = () => {
               <Typography variant='h2'>Welcome Back!</Typography>
             </Box>
 
-            <LoginForm />
+            <LoginForm initTestAcc={initTestAcc} />
 
             <Box
               sx={{
@@ -51,10 +54,23 @@ const LoginPage = () => {
               }}
             >
               <Typography variant='body2'>Not a member yet?</Typography>
-
               <Link to='/register'>
                 <Typography variant='body2'>SIGN UP</Typography>
               </Link>
+              /
+              <Box
+                onClick={() => setInitTestAcc(!initTestAcc)}
+                sx={{
+                  textDecoration: 'underline',
+                  color: theme.palette.weDeal?.secondary?.lighter,
+                  '&:hover': {
+                    color: theme.palette.weDeal?.primary?.default,
+                    cursor: 'pointer',
+                  },
+                }}
+              >
+                <Typography variant='body2'>GENERATE TEST ACCOUNT</Typography>
+              </Box>
             </Box>
           </Box>
         </Grid>
