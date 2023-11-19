@@ -83,10 +83,8 @@ const Home = () => {
     content = <p>There's an error</p>;
   }
   return (
-    <>
-      <Box sx={{ marginTop: '1.5%' }}>
-        <SearchBar />
-      </Box>
+    <Box sx={{ marginTop: 8 }}>
+      <SearchBar />
       <Container
         sx={{
           mt: 5,
@@ -103,7 +101,7 @@ const Home = () => {
           {content}
         </Grid>
       </Container>
-    </>
+    </Box>
   );
 };
 

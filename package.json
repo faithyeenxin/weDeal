@@ -20,5 +20,8 @@
   "license": "ISC",
   "engines": {
     "node": ">=16"
+  },
+  "dependencies": {
+    "react-toastify": "^9.1.3"
   }
 }

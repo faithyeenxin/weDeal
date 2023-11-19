@@ -9,21 +9,23 @@ import {
   ListItemButton,
   ListItemText,
   Typography,
-} from "@mui/material";
-import { Box } from "@mui/system";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import { Outlet, useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import MenuIcon from "@mui/icons-material/Menu";
-import React, { useState } from "react";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
+  useTheme,
+} from '@mui/material';
+import { Box } from '@mui/system';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import { Outlet, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import MenuIcon from '@mui/icons-material/Menu';
+import React, { useState } from 'react';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
 const drawerWidth = 240;
 
-const navItems = ["Profile", "Add Deal", "LogOut"];
+const navItems = ['Profile', 'Add Deal', 'LogOut'];
 
 const LoggedOnNavBar = (props: any) => {
   const { window } = props;
+  const theme = useTheme();
 
   const navigate = useNavigate();
 
@@ -34,8 +36,20 @@ const LoggedOnNavBar = (props: any) => {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography sx={{ my: 2, color: "#fbb002", fontSize: "2rem" }}>
+    <Box onClick={handleDrawerToggle}>
+      <Typography
+        variant='h3'
+        sx={{
+          textAlign: 'center',
+          m: 2,
+          background:
+            'linear-gradient(90deg, #FE400E 0%, #FF5935 47.4%, #FFAD1D 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          TextFillColor: 'transparent',
+        }}
+      >
         weDeal
       </Typography>
 
@@ -44,12 +58,12 @@ const LoggedOnNavBar = (props: any) => {
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton
-              sx={{ textAlign: "center" }}
+              sx={{ textAlign: 'center' }}
               onClick={() => {
-                if (item === "LogOut") {
+                if (item === 'LogOut') {
                   sessionStorage.clear();
-                  navigate("/");
-                } else if (item === "Add Deal") {
+                  navigate('/');
+                } else if (item === 'Add Deal') {
                   navigate(`/add-deal`);
                 } else {
                   navigate(`/${item.toLowerCase()}`);
@@ -58,9 +72,10 @@ const LoggedOnNavBar = (props: any) => {
             >
               <ListItemText
                 primary={item}
-                sx={{ color: "#fbb002" }}
+                sx={{ color: theme.palette.weDeal?.secondary?.default }}
                 primaryTypographyProps={{
-                  fontSize: "1.4rem",
+                  textAlign: 'center',
+                  fontWeight: 600,
                 }}
               />
             </ListItemButton>
@@ -74,52 +89,52 @@ const LoggedOnNavBar = (props: any) => {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <>
-      <AppBar>
-        <Toolbar
+    <Box>
+      <AppBar
+        sx={{
+          paddingX: '5%',
+          paddingY: 0.2,
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}
+        color='inherit'
+      >
+        <Typography
+          variant='logo'
           sx={{
-            backgroundColor: "#efe0d3",
+            cursor: 'pointer',
+          }}
+          onClick={() => {
+            navigate('/home');
           }}
         >
-          <LocalMallIcon sx={{ mr: 1, color: "#fbb002", fontSize: "2.5rem" }} />
-          <Typography
-            variant="h2"
-            sx={{
-              color: "#fbb002",
-              cursor: "pointer",
-              flexGrow: 1,
-            }}
-            onClick={() => {
-              navigate(`/home`);
-            }}
+          weDeal
+        </Typography>
+        <Box sx={{ display: 'flex', gap: '1rem' }}>
+          <IconButton
+            aria-label='open drawer'
+            edge='start'
+            onClick={handleDrawerToggle}
           >
-            weDeal
-          </Typography>
-          <Box sx={{ display: "flex", gap: "1rem" }}>
-            <IconButton
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-            >
-              <MenuIcon sx={{ color: "#fbb002" }} />
-            </IconButton>
-          </Box>
-        </Toolbar>
+            <MenuIcon sx={{ color: '#fbb002' }} />
+          </IconButton>
+        </Box>
       </AppBar>
-      <Box component="nav">
+      <Box component='nav'>
         <Drawer
           container={container}
-          variant="temporary"
+          variant='temporary'
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
-          anchor="right"
+          anchor='right'
           sx={{
             //   display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
               width: drawerWidth,
             },
           }}
@@ -127,9 +142,8 @@ const LoggedOnNavBar = (props: any) => {
           {drawer}
         </Drawer>
       </Box>
-      <Toolbar />
       <Outlet />
-    </>
+    </Box>
   );
 };
 

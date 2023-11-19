@@ -5,30 +5,30 @@ import {
   Grid,
   TextField,
   Typography,
-} from "@mui/material";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { IUser, IVotes } from "../Interface";
-import format from "date-fns/format";
-import MediaCard from "../components/MediaCard";
-import { Box } from "@mui/system";
-import { IDeal } from "../Interface";
-import MediaCardEdittable from "../components/MediaCardEdittabe";
-import parseJwt from "../UIUX/parseJwt";
+} from '@mui/material';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { IUser, IVotes } from '../Interface';
+import format from 'date-fns/format';
+import MediaCard from '../components/MediaCard';
+import { Box } from '@mui/system';
+import { IDeal } from '../Interface';
+import MediaCardEdittable from '../components/MediaCardEdittabe';
+import parseJwt from '../UIUX/parseJwt';
 const UserProfile = () => {
-  const token: any = sessionStorage.getItem("token");
+  const token: any = sessionStorage.getItem('token');
   const payload = parseJwt(token);
   const id = payload.id;
 
   const [upvotes, setUpvotes] = useState(0);
   const [user, setUser] = useState<IUser>({
-    id: "",
-    username: "",
-    password: "",
-    name: "",
-    image: "",
-    email: "",
+    id: '',
+    username: '',
+    password: '',
+    name: '',
+    image: '',
+    email: '',
     dateJoined: new Date(),
     Deals: [],
   });
@@ -50,27 +50,27 @@ const UserProfile = () => {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <>
+    <Box sx={{ marginTop: 12 }}>
       <Container
-        maxWidth="lg"
+        maxWidth='lg'
         sx={{
           mt: 5,
           mb: 5,
           p: 2,
-          backgroundColor: "#efe0d3",
-          borderRadius: "2%",
+          backgroundColor: '#efe0d3',
+          borderRadius: '2%',
         }}
       >
         <Typography
-          variant="h3"
+          variant='h3'
           sx={{
-            fontFamily: "Futura",
-            color: "#fbb002",
-            fontWeight: "bold",
+            fontFamily: 'Futura',
+            color: '#fbb002',
+            fontWeight: 'bold',
             letterSpacing: 6,
             mt: 2,
           }}
-          align="center"
+          align='center'
         >
           Your Profile Details
         </Typography>
@@ -80,9 +80,9 @@ const UserProfile = () => {
             xs={12}
             md={4}
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
             }}
           >
             <Avatar src={user.image} sx={{ width: 130, height: 130 }} />
@@ -92,53 +92,53 @@ const UserProfile = () => {
             xs={12}
             md={8}
             sx={{
-              display: "flex",
-              justifyContent: "left",
-              alignItems: "left",
+              display: 'flex',
+              justifyContent: 'left',
+              alignItems: 'left',
             }}
           >
             <Grid container rowSpacing={1} sx={{ m: 3 }}>
               <Grid item xs={12}>
-                <Typography variant="body2">Name</Typography>
+                <Typography variant='body2'>Name</Typography>
                 <TextField
                   disabled
-                  size="small"
+                  size='small'
                   value={user.name}
                   sx={{
-                    width: "100%",
+                    width: '100%',
                   }}
                 />
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="body2">Joined On</Typography>
+                <Typography variant='body2'>Joined On</Typography>
                 <TextField
                   disabled
-                  size="small"
-                  value={format(new Date(user.dateJoined), "dd MMMM yyyy")}
+                  size='small'
+                  value={format(new Date(user.dateJoined), 'dd MMMM yyyy')}
                   sx={{
-                    width: "100%",
+                    width: '100%',
                   }}
                 />
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="body2">Deals Created</Typography>
+                <Typography variant='body2'>Deals Created</Typography>
                 <TextField
                   disabled
-                  size="small"
+                  size='small'
                   value={user?.Deals?.length}
                   sx={{
-                    width: "100%",
+                    width: '100%',
                   }}
                 />
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="body2"> Total Upvotes-To-Date</Typography>
+                <Typography variant='body2'> Total Upvotes-To-Date</Typography>
                 <TextField
                   disabled
-                  size="small"
+                  size='small'
                   value={upvotes}
                   sx={{
-                    width: "100%",
+                    width: '100%',
                   }}
                 />
               </Grid>
@@ -148,25 +148,25 @@ const UserProfile = () => {
       </Container>
       {user?.Deals?.length !== 0 && (
         <Container
-          maxWidth="lg"
+          maxWidth='lg'
           sx={{
-            mt: "3rem",
-            mb: "3rem",
+            mt: '3rem',
+            mb: '3rem',
             p: 3,
-            borderRadius: "1%",
-            backgroundColor: "#efe0d3",
+            borderRadius: '1%',
+            backgroundColor: '#efe0d3',
           }}
         >
           <Typography
-            variant="h3"
+            variant='h3'
             sx={{
-              fontFamily: "Futura",
-              color: "#fbb002",
-              fontWeight: "bold",
+              fontFamily: 'Futura',
+              color: '#fbb002',
+              fontWeight: 'bold',
               letterSpacing: 6,
               pb: 5,
             }}
-            align="center"
+            align='center'
           >
             Deals Contributed
           </Typography>
@@ -180,9 +180,9 @@ const UserProfile = () => {
                   sm={6}
                   md={3}
                   sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                   }}
                 >
                   <MediaCardEdittable item={deal} />
@@ -192,7 +192,7 @@ const UserProfile = () => {
           </Grid>
         </Container>
       )}
-    </>
+    </Box>
   );
 };
 

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
 import shoppingMan from '../../public/shopping_man2.mp4';
 import RegistrationForm from '../components/RegistrationForm';
+import HeroOne from '../assets/hero1.svg';
 const RegisterPage = () => {
   return (
     <Box>
@@ -12,7 +13,7 @@ const RegisterPage = () => {
           md={12}
           lg={6}
           sx={{
-            backgroundImage: `url(https://images.pexels.com/photos/462235/pexels-photo-462235.jpeg?auto=compress&cs=tinysrgb&w=1600)`,
+            backgroundImage: `url(${HeroOne})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center center',
             height: '100vh',
@@ -39,10 +40,11 @@ const RegisterPage = () => {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              mb: '1rem',
             }}
           >
-            <Typography variant='h2'>Join Us!</Typography>
+            <Typography variant='h2' sx={{ mb: '2rem' }}>
+              Join Us!
+            </Typography>
             <RegistrationForm />
             <Box
               sx={{
