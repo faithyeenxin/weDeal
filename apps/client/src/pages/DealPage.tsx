@@ -76,6 +76,7 @@ const DealPage = () => {
             container
             sx={{
               backgroundColor: alpha(
+                // @ts-ignore
                 theme.palette.weDeal?.primary?.lighter,
                 0.1
               ),

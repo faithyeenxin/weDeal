@@ -6,43 +6,43 @@ import {
   InputAdornment,
   TextField,
   Typography,
-} from "@mui/material";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { Container } from "@mui/system";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { IDeal, IUser } from "../Interface";
-import format from "date-fns/format";
+} from '@mui/material';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { Container } from '@mui/system';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { IDeal, IUser } from '../Interface';
+import format from 'date-fns/format';
 
 const DealPageEdittable = () => {
-  const [locationStatus, setLocationStatus] = useState("");
+  const [locationStatus, setLocationStatus] = useState('');
   const [locationDetail, setLocationDetails] = useState<any>();
   const navigate = useNavigate();
   const [offEditMode, setOffEditMode] = useState<boolean>(true);
   const { id, dealid } = useParams();
   const [user, setUser] = useState<IUser>({
-    id: "",
-    username: "",
-    password: "",
-    name: "",
-    image: "",
-    email: "",
+    id: '',
+    username: '',
+    password: '',
+    name: '',
+    image: '',
+    email: '',
     dateJoined: new Date(),
   });
-  const [bigImg, setBigImg] = useState("");
+  const [bigImg, setBigImg] = useState('');
   const [deal, setDeal] = useState<IDeal>({
-    id: "",
-    userId: "",
-    name: "",
+    id: '',
+    userId: '',
+    name: '',
     retailPrice: 0,
     discountedPrice: 0,
-    location: "",
-    dealLocation: "",
+    location: '',
+    dealLocation: '',
     dealPostedDate: new Date(),
     dealExpiry: new Date(),
-    categoryId: "",
+    categoryId: '',
     DealImages: [],
     Votes: [],
   });
@@ -89,28 +89,29 @@ const DealPageEdittable = () => {
       name: deal?.name,
       retailPrice: deal?.retailPrice,
       discountedPrice: deal?.discountedPrice,
-      dealExpiry: format(new Date(deal?.dealExpiry), "yyyy-MM-dd"),
+      dealExpiry: format(new Date(deal?.dealExpiry), 'yyyy-MM-dd'),
       location: deal?.location,
     },
     validationSchema: Yup.object().shape({
-      name: Yup.string().required("Name of deal required"),
-      discountedPrice: Yup.number().required("Required"),
-      retailPrice: Yup.number().required("Required"),
-      dealExpiry: Yup.date().required("Required"),
+      name: Yup.string().required('Name of deal required'),
+      discountedPrice: Yup.number().required('Required'),
+      retailPrice: Yup.number().required('Required'),
+      dealExpiry: Yup.date().required('Required'),
       location: Yup.string()
-        .required("Required")
+        .required('Required')
         .test(
-          "location-exist",
-          "Location does not exist",
-           (location: any): any =>  {
-            return axios.get(
+          'location-exist',
+          'Location does not exist',
+          (location: any): any => {
+            return axios
+              .get(
                 `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDBh_veIl8kLIgp2gCyglYDvnl-d0EK9CU&address=${location}`
               )
               .then((res) => {
                 setLocationStatus(res.data.status);
                 setLocationDetails(res.data);
                 console.log(res.data);
-                return res.data.status === "OK"
+                return res.data.status === 'OK';
               })
               .catch((err) => console.log(err));
           }
@@ -118,7 +119,7 @@ const DealPageEdittable = () => {
     }),
 
     onSubmit: (values: any) => {
-      console.log("edit button clicked")
+      console.log('edit button clicked');
       const body = {
         id: dealid,
         name: values.name,
@@ -138,7 +139,7 @@ const DealPageEdittable = () => {
           .patch(`/api/deal/${dealid}`, body)
           .then((res) => {
             console.log(res.data);
-            alert("Your deal has been updated");
+            alert('Your deal has been updated');
             navigate(`/home`);
           })
           .catch((err) => console.log(err));
@@ -151,7 +152,7 @@ const DealPageEdittable = () => {
       .delete(`/api/deal/${dealid}`)
       .then((res) => {
         console.log(res.data);
-        alert("deal has been deleted");
+        alert('deal has been deleted');
         navigate(`/home`);
       })
       .catch((err) => console.log(err));
@@ -160,13 +161,13 @@ const DealPageEdittable = () => {
   return (
     <>
       <Container
-        maxWidth="lg"
+        maxWidth='lg'
         sx={{
-          mt: "3rem",
-          mb: "3rem",
-          pb: "0.5rem",
-          backgroundColor: "#efe0d3",
-          borderRadius: "3%",
+          mt: '3rem',
+          mb: '3rem',
+          pb: '0.5rem',
+          backgroundColor: '#efe0d3',
+          borderRadius: '3%',
         }}
       >
         <form onSubmit={formik.handleSubmit}>
@@ -175,21 +176,21 @@ const DealPageEdittable = () => {
               item
               xs={12}
               sx={{
-                display: "flex",
-                justifyContent: "left",
-                alignItems: "left",
+                display: 'flex',
+                justifyContent: 'left',
+                alignItems: 'left',
               }}
             >
               <TextField
                 disabled={offEditMode}
-                id="name"
-                name="name"
-                size="medium"
+                id='name'
+                name='name'
+                size='medium'
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 sx={{
-                  width: "100%",
+                  width: '100%',
                   pl: 2,
                   pr: 2,
                 }}
@@ -202,32 +203,32 @@ const DealPageEdittable = () => {
                 sm={12}
                 md={6}
                 sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}
               >
                 <Grid
                   container
                   sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                   }}
                 >
                   <Grid
                     item
                     sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
                     }}
                   >
                     <img
                       src={bigImg}
                       style={{
-                        width: "50vh",
-                        marginBottom: "1rem",
+                        width: '50vh',
+                        marginBottom: '1rem',
                         borderRadius: 15,
                       }}
                     />
@@ -236,9 +237,9 @@ const DealPageEdittable = () => {
                     <Grid
                       container
                       sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                       }}
                     >
                       {deal?.DealImages.slice(0, 3).map((image, index) => (
@@ -247,15 +248,15 @@ const DealPageEdittable = () => {
                           key={index}
                           xs={3.1}
                           sx={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
                           }}
                         >
                           <img
                             key={index}
                             src={image.image}
-                            style={{ width: "90%", borderRadius: 15 }}
+                            style={{ width: '90%', borderRadius: 15 }}
                             onClick={handleEnlarge}
                           />
                         </Grid>
@@ -270,32 +271,32 @@ const DealPageEdittable = () => {
                 md={6}
                 sx={{
                   p: 3,
-                  justifyContent: "left",
-                  alignItems: "left",
+                  justifyContent: 'left',
+                  alignItems: 'left',
                 }}
               >
-                {" "}
+                {' '}
                 <Grid container spacing={2} sx={{ pt: 5 }}>
                   <Grid item xs={12}>
                     <Grid container spacing={1}>
                       <Grid item md={6}>
-                        <Typography variant="body2" sx={{ mb: "0.5rem" }}>
+                        <Typography variant='body2' sx={{ mb: '0.5rem' }}>
                           Discounted Price
                         </Typography>
                         <TextField
                           disabled={offEditMode}
-                          id="discountedPrice"
-                          name="discountedPrice"
-                          size="small"
+                          id='discountedPrice'
+                          name='discountedPrice'
+                          size='small'
                           value={formik.values.discountedPrice}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
                           sx={{
-                            width: "100%",
+                            width: '100%',
                           }}
                           InputProps={{
                             startAdornment: (
-                              <InputAdornment position="start">
+                              <InputAdornment position='start'>
                                 $
                               </InputAdornment>
                             ),
@@ -303,23 +304,23 @@ const DealPageEdittable = () => {
                         />
                       </Grid>
                       <Grid item md={6}>
-                        <Typography variant="body2" sx={{ mb: "0.5rem" }}>
+                        <Typography variant='body2' sx={{ mb: '0.5rem' }}>
                           Retail Price
                         </Typography>
                         <TextField
                           disabled={offEditMode}
-                          id="retailPrice"
-                          name="retailPrice"
-                          size="small"
+                          id='retailPrice'
+                          name='retailPrice'
+                          size='small'
                           value={formik.values.retailPrice}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
                           sx={{
-                            width: "100%",
+                            width: '100%',
                           }}
                           InputProps={{
                             startAdornment: (
-                              <InputAdornment position="start">
+                              <InputAdornment position='start'>
                                 $
                               </InputAdornment>
                             ),
@@ -329,70 +330,71 @@ const DealPageEdittable = () => {
                     </Grid>
                   </Grid>
                   <Grid item xs={12}>
-                    <Typography variant="body2" sx={{ mb: "0.5rem" }}>
+                    <Typography variant='body2' sx={{ mb: '0.5rem' }}>
                       Savings
                     </Typography>
                     <TextField
                       disabled
-                      id="savings"
-                      name="savings"
-                      size="small"
+                      id='savings'
+                      name='savings'
+                      size='small'
                       value={(
                         formik.values.retailPrice -
                         formik.values.discountedPrice
                       ).toFixed(2)}
                       sx={{
-                        width: "100%",
+                        width: '100%',
                       }}
                       InputProps={{
                         startAdornment: (
-                          <InputAdornment position="start">$</InputAdornment>
+                          <InputAdornment position='start'>$</InputAdornment>
                         ),
                       }}
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <Typography variant="body2" sx={{ mb: "0.5rem" }}>
+                    <Typography variant='body2' sx={{ mb: '0.5rem' }}>
                       End Of Deal
                     </Typography>
                     <TextField
                       disabled={offEditMode}
-                      id="dealExpiry"
-                      name="dealExpiry"
-                      type="date"
-                      size="small"
+                      id='dealExpiry'
+                      name='dealExpiry'
+                      type='date'
+                      size='small'
                       value={formik.values.dealExpiry}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       sx={{
-                        width: "100%",
+                        width: '100%',
                       }}
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <Typography variant="body2" sx={{ mb: "0.5rem" }}>
+                    <Typography variant='body2' sx={{ mb: '0.5rem' }}>
                       Location
                     </Typography>
                     <TextField
                       disabled={offEditMode}
-                      id="location"
-                      name="location"
-                      size="small"
+                      id='location'
+                      name='location'
+                      size='small'
                       value={formik.values.location}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       sx={{
-                        width: "100%",
+                        width: '100%',
                       }}
                     />
                     {formik.touched.location && formik.errors.location ? (
+                      // @ts-ignore
                       <div>{formik.errors.location}</div>
                     ) : null}
-                    {locationStatus === "OK" ? (
-                      <Typography variant="body2" sx={{ p: 0.7 }}>
+                    {locationStatus === 'OK' ? (
+                      <Typography variant='body2' sx={{ p: 0.7 }}>
                         {JSON.stringify(
                           locationDetail.results[0].formatted_address
-                        ).replace(/['"]+/g, "")}
+                        ).replace(/['"]+/g, '')}
                       </Typography>
                     ) : null}
                   </Grid>
@@ -400,43 +402,43 @@ const DealPageEdittable = () => {
                     item
                     xs={12}
                     sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      itemAlign: "center",
-                      gap: "1rem",
+                      display: 'flex',
+                      justifyContent: 'center',
+                      itemAlign: 'center',
+                      gap: '1rem',
                     }}
                   >
                     <Button
-                      type="submit"
+                      type='submit'
                       sx={{
-                        background: "#fbb001",
-                        color: "white",
+                        background: '#fbb001',
+                        color: 'white',
                         // letterSpacing: "0.2rem",
-                        mt: "3rem",
-                        px: "2rem",
-                        "&:hover": {
-                          backgroundColor: "#7da471 ",
+                        mt: '3rem',
+                        px: '2rem',
+                        '&:hover': {
+                          backgroundColor: '#7da471 ',
                         },
                       }}
                     >
-                      {offEditMode ? "Edit" : "Submit"}
+                      {offEditMode ? 'Edit' : 'Submit'}
                     </Button>
                     {!offEditMode && (
                       <Button
                         sx={{
-                          background: "#fbb001",
-                          color: "white",
+                          background: '#fbb001',
+                          color: 'white',
                           // letterSpacing: "0.2rem",
-                          mt: "3rem",
-                          px: "2rem",
-                          "&:hover": {
-                            backgroundColor: "#7da471",
+                          mt: '3rem',
+                          px: '2rem',
+                          '&:hover': {
+                            backgroundColor: '#7da471',
                           },
                         }}
                         onClick={() => {
                           setDeal({
                             ...deal,
-                            name: "rerender initial state",
+                            name: 'rerender initial state',
                           });
                           setOffEditMode(!offEditMode);
                         }}
@@ -446,13 +448,13 @@ const DealPageEdittable = () => {
                     )}
                     <Button
                       sx={{
-                        background: "gray",
-                        color: "white",
+                        background: 'gray',
+                        color: 'white',
                         // letterSpacing: "0.2rem",
-                        mt: "3rem",
-                        px: "2rem",
-                        "&:hover": {
-                          backgroundColor: "red",
+                        mt: '3rem',
+                        px: '2rem',
+                        '&:hover': {
+                          backgroundColor: 'red',
                         },
                       }}
                       onClick={handleDeleteDeal}
