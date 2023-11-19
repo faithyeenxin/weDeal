@@ -50,12 +50,13 @@ const UserProfile = () => {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <Box sx={{ marginTop: 12 }}>
+    <Box sx={{ marginTop: 12, px: 2 }}>
       <Container
         maxWidth='lg'
         sx={{
-          mt: 5,
-          mb: 5,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 3,
           p: 2,
           backgroundColor: '#efe0d3',
           borderRadius: '2%',
@@ -97,7 +98,7 @@ const UserProfile = () => {
               alignItems: 'left',
             }}
           >
-            <Grid container rowSpacing={1} sx={{ m: 3 }}>
+            <Grid container rowSpacing={1}>
               <Grid item xs={12}>
                 <Typography variant='body2'>Name</Typography>
                 <TextField
@@ -176,8 +177,8 @@ const UserProfile = () => {
                 <Grid
                   item
                   key={index}
-                  xs={12}
-                  sm={6}
+                  xs={6}
+                  sm={4}
                   md={3}
                   sx={{
                     display: 'flex',

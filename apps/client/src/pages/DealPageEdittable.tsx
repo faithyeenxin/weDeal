@@ -159,7 +159,7 @@ const DealPageEdittable = () => {
   };
 
   return (
-    <>
+    <Box sx={{ marginTop: 12, px: 2 }}>
       <Container
         maxWidth='lg'
         sx={{
@@ -197,7 +197,7 @@ const DealPageEdittable = () => {
               />
             </Grid>
 
-            <Grid container sx={{ m: 5 }}>
+            <Grid container sx={{ m: 3 }}>
               <Grid
                 item
                 sm={12}
@@ -227,7 +227,7 @@ const DealPageEdittable = () => {
                     <img
                       src={bigImg}
                       style={{
-                        width: '50vh',
+                        width: '40vh',
                         marginBottom: '1rem',
                         borderRadius: 15,
                       }}
@@ -246,7 +246,7 @@ const DealPageEdittable = () => {
                         <Grid
                           item
                           key={index}
-                          xs={3.1}
+                          xs={3}
                           sx={{
                             display: 'flex',
                             justifyContent: 'center',
@@ -468,7 +468,7 @@ const DealPageEdittable = () => {
           </Grid>
         </form>
       </Container>
-    </>
+    </Box>
   );
 };
 

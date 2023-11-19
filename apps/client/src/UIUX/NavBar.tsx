@@ -30,7 +30,7 @@ const NavBar = () => {
       <AppBar
         sx={{
           paddingX: '5%',
-          paddingY: 0.2,
+          paddingY: { xs: '2%', md: '0.2%' },
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',

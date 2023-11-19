@@ -11,6 +11,7 @@ import {
   IconButton,
   Grid,
   CardHeader,
+  Box,
 } from '@mui/material';
 
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
@@ -137,7 +138,7 @@ const MediaCard = ({ item }: MediaCardProps) => {
     <Card
       sx={{
         width: 260,
-        height: 430,
+        height: 420,
       }}
     >
       <Typography variant='body2' sx={{ textAlign: 'right', mr: 1 }}>
@@ -149,7 +150,7 @@ const MediaCard = ({ item }: MediaCardProps) => {
         image={item?.DealImages[0]?.image}
         sx={{ mt: '5%', mb: '5%' }}
       />
-      <CardContent sx={{ height: '130px' }}>
+      <CardContent sx={{ height: '100px' }}>
         <Typography
           gutterBottom
           variant='h7'
@@ -195,48 +196,52 @@ const MediaCard = ({ item }: MediaCardProps) => {
         </Grid>
       </CardContent>
       <CardActions>
-        <Grid container>
-          <Grid item xs={6}>
-            <Grid container>
-              <Grid item md={4} sx={positionSx}>
-                <IconButton onClick={() => addDownvote(id, item.id)}>
-                  {/* <IconButton> */}
-                  <ThumbDownOffAltIcon
-                    sx={
-                      item.Votes.some((item) => {
-                        return item.userId === id && item.voteStatus === -1;
-                      })
-                        ? { color: 'red' }
-                        : { color: 'gray' }
-                    }
-                  />
-                </IconButton>
-              </Grid>
-              <Grid item md={4} sx={positionSx}>
-                <Typography variant='h5' sx={{ fontFamily: 'Arial' }}>
-                  {totalVotes}
-                </Typography>
-              </Grid>
-              <Grid item md={4} sx={positionSx}>
-                <IconButton onClick={() => addUpvote(id, item.id)}>
-                  {/* <IconButton> */}
-                  <ThumbUpOffAltIcon
-                    sx={
-                      item.Votes.some(
-                        (item) => item.userId === id && item.voteStatus === 1
-                      )
-                        ? { color: 'green' }
-                        : { color: 'gray' }
-                    }
-                  />
-                </IconButton>
-              </Grid>
-            </Grid>
-          </Grid>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '100%',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <IconButton onClick={() => addDownvote(id, item.id)}>
+              {/* <IconButton> */}
+              <ThumbDownOffAltIcon
+                sx={
+                  item.Votes.some((item) => {
+                    return item.userId === id && item.voteStatus === -1;
+                  })
+                    ? { color: 'red' }
+                    : { color: 'gray' }
+                }
+              />
+            </IconButton>
 
-          <Grid
-            item
-            xs={6}
+            <Typography variant='h6' sx={{ fontFamily: 'Arial' }}>
+              {totalVotes}
+            </Typography>
+
+            <IconButton onClick={() => addUpvote(id, item.id)}>
+              {/* <IconButton> */}
+              <ThumbUpOffAltIcon
+                sx={
+                  item.Votes.some(
+                    (item) => item.userId === id && item.voteStatus === 1
+                  )
+                    ? { color: 'green' }
+                    : { color: 'gray' }
+                }
+              />
+            </IconButton>
+          </Box>
+
+          <Box
             sx={{
               display: 'flex',
               justifyContent: 'right',
@@ -251,8 +256,8 @@ const MediaCard = ({ item }: MediaCardProps) => {
             >
               <MoreHorizIcon />
             </IconButton>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </CardActions>
     </Card>
   );

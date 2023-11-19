@@ -93,7 +93,7 @@ const LoggedOnNavBar = (props: any) => {
       <AppBar
         sx={{
           paddingX: '5%',
-          paddingY: 0.2,
+          paddingY: { xs: '1%', md: '0.2%' },
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -104,6 +104,9 @@ const LoggedOnNavBar = (props: any) => {
           variant='logo'
           sx={{
             cursor: 'pointer',
+            display: 'flex',
+            alignContent: 'center',
+            alignItems: 'center',
           }}
           onClick={() => {
             navigate('/home');
